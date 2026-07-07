@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  title: string;
+  src: ImageMetadata;
+  alt: string;
+  caption?: string;
+  eager?: boolean;
+}
+
+const { title, src, alt, caption, eager = false } = Astro.props;
+---
+
+<figure>
+  <div class="window">
+    <div class="window-bar"><i></i><i></i><i></i><span>{title}</span></div>
+    <Image src={src} alt={alt} loading={eager ? "eager" : "lazy"} />
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

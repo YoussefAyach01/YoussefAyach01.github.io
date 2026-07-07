@@ -1,0 +1,67 @@
+---
+import Base from "../../layouts/Base.astro";
+import campaigns from "../../assets/img/onebotads-campaigns.webp";
+import Window from "../../components/Window.astro";
+---
+
+<Base
+  title="Projects — Ayach Youssef"
+  description="Shipped work: OneBotAds and other projects by Ayach Youssef, full-stack software engineer."
+>
+  <section class="study-head container">
+    <p class="eyebrow">Projects</p>
+    <h1 class="display">Things I&rsquo;ve shipped</h1>
+    <p class="lede">
+      Each project gets a full case study: what it is, what I built, how
+      it&rsquo;s architected, and where it runs. New entries land here as they
+      ship.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="featured">
+        <div class="featured-copy reveal">
+          <p class="eyebrow">2026 — Digitalye — production SaaS</p>
+          <h3>OneBotAds</h3>
+          <p>
+            AI-powered ad automation across Meta, TikTok, Google, Snapchat,
+            LinkedIn and Taboola — built from a click-through mockup to a live
+            product in a five-month internship.
+          </p>
+          <div class="featured-tags">
+            <span class="tag tag-blue">React</span>
+            <span class="tag tag-green">Node.js / Express</span>
+            <span class="tag tag-yellow">PostgreSQL</span>
+            <span class="tag tag-red">LLM agent</span>
+          </div>
+          <div class="featured-actions">
+            <a href="/projects/onebotads/" class="btn btn-primary"
+              >Read the case study</a
+            >
+            <a
+              href="https://onebotads.net"
+              class="btn"
+              target="_blank"
+              rel="noopener">Live site</a
+            >
+          </div>
+        </div>
+        <div class="reveal">
+          <Window
+            title="onebotads.net — Campaign Manager"
+            src={campaigns}
+            alt="OneBotAds Campaign Manager listing campaigns across Meta, Taboola and TikTok in one table"
+          />
+        </div>
+      </div>
+
+      <p class="arch-note reveal" style="margin-top: var(--space-16)">
+        Earlier, smaller work — a CPU simulator, Linux server labs, Oracle
+        database systems, network simulations — lives on the <a href="/#work"
+          >home page</a
+        >.
+      </p>
+    </div>
+  </section>
+</Base>

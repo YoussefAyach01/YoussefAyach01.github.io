@@ -1,0 +1,30 @@
+---
+interface Entry {
+  date: string;
+  datetime?: string;
+  text: string;
+  href?: string;
+}
+
+interface Props {
+  entries: Entry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<aside class="shiplog" aria-label="Ship log">
+  <p class="shiplog-title">
+    ship.log <span class="dot" aria-hidden="true"></span>
+  </p>
+  <ol>
+    {
+      entries.map((e) => (
+        <li>
+          <time datetime={e.datetime}>{e.date}</time>
+          <span>{e.href ? <a href={e.href}>{e.text}</a> : e.text}</span>
+        </li>
+      ))
+    }
+  </ol>
+</aside>
