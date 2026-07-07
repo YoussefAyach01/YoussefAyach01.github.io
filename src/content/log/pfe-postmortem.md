@@ -1,11 +1,11 @@
 ---
-title: "From mockup to production in five months: a PFE postmortem"
-description: "My final-year internship brief was a React mockup with nothing behind it. Five months later it was a live SaaS with six ad-platform integrations. What went right, what bit me, and what I'd do differently."
+title: "From mockup to production in three months: a PFE postmortem"
+description: "My final-year internship brief was a React mockup with nothing behind it. Three months later it was a live SaaS with six ad-platform integrations. What went right, what bit me, and what I'd do differently."
 date: 2026-07-07
 tags: ["postmortem", "internship", "OneBotAds", "PostgreSQL"]
 ---
 
-In early 2026 I started my final-year internship (PFE) at Digitalye with a deceptively simple brief: OneBotAds, an ad-automation platform, existed as a React interface you could click through — and nothing else. No database. No API. No connected platform. By June it was live at [onebotads.net](https://onebotads.net) with six ad-platform integrations, an AI campaign agent, payments, and a 17-table PostgreSQL schema. This is the honest version of how that went.
+In April 2026 I started my final-year internship (PFE) at Jobistart with a deceptively simple brief: OneBotAds, an ad-automation platform, existed as a React interface you could click through — and nothing else. No database. No API. No connected platform. By June it was live at [onebotads.net](https://onebotads.net) with six ad-platform integrations, an AI campaign agent, payments, and a 17-table PostgreSQL schema. This is the honest version of how that went.
 
 ## Start by finding out what's actually real
 

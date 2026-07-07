@@ -766,3 +766,20 @@ figcaption {
   letter-spacing: 0.05em;
   color: var(--muted);
 }
+
+/* ---------- Print (used by /cv) ---------- */
+@media print {
+  .masthead,
+  .footer,
+  .glow,
+  .cv-tools {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .section {
+    border-top: none;
+    padding-block: 0;
+  }
+}
