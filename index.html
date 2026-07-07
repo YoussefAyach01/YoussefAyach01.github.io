@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayach Youssef — Full-Stack Software Engineer</title>
+  <meta name="description" content="Full-stack software engineer in Morocco. Built OneBotAds, an AI-powered ad-automation SaaS, from empty backend to production.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <div class="container masthead-inner">
+      <a href="#" class="wordmark">Ayach Youssef</a>
+      <nav aria-label="Site">
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <a href="assets/Ayach_Youssef_CV.pdf" class="btn" download>Download CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero container">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Full-stack software engineer — Berrechid, Morocco</p>
+          <h1 class="display">I learn fast, and&nbsp;I&nbsp;<em>ship</em>.</h1>
+          <p class="lede">
+            In my final-year internship I took OneBotAds from a click-through mockup to a
+            production SaaS: six ad-platform integrations, an AI campaign agent, and a
+            17-table PostgreSQL backend — live on the public internet.
+          </p>
+          <div class="hero-actions">
+            <a href="projects/onebotads.html" class="btn btn-primary">Read the OneBotAds case study</a>
+            <a href="#contact" class="btn">Get in touch</a>
+          </div>
+        </div>
+
+        <aside class="shiplog" aria-label="Ship log">
+          <p class="shiplog-title">ship.log <span class="dot" aria-hidden="true"></span></p>
+          <ol>
+            <li><time datetime="2023-09">2023</time> <span>DEUST — Maths, CS &amp; Physics, FST Settat</span></li>
+            <li><time datetime="2025-09">2025</time> <span>Licence ST — Computer Engineering</span></li>
+            <li><time datetime="2026">2026</time> <span>PFE internship at Digitalye — OneBotAds</span></li>
+            <li><time datetime="2026-06-23">2026.06</time> <span>onebotads.net deployed to production</span></li>
+            <li><time datetime="2026-06-30">2026.06</time> <span>full handoff delivered: code, docs, DB</span></li>
+            <li><time>now</time> <span>open to full-stack roles, remote or on-site</span></li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED WORK ============ -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Featured — final-year internship, Digitalye</p>
+          <h2 class="display">OneBotAds</h2>
+        </div>
+
+        <div class="featured">
+          <div class="featured-copy reveal">
+            <h3>One interface for a media buyer&rsquo;s entire ad operation.</h3>
+            <p>
+              Connect Meta, TikTok, Google, Snapchat, LinkedIn and Taboola accounts, then manage
+              every campaign from one dashboard — or let the AI agent build the campaign for you
+              through conversation. I started from a frontend mockup with no backend at all and
+              built everything underneath: OAuth for six platforms, the database, the API,
+              payments, and the attribution pipeline that ties ad spend to real Shopify revenue.
+            </p>
+            <div class="statgrid">
+              <div class="stat"><strong>6</strong> <span>ad platforms</span></div>
+              <div class="stat"><strong>17</strong> <span>database tables</span></div>
+              <div class="stat"><strong>35</strong> <span>API routes</span></div>
+              <div class="stat"><strong>6</strong> <span>MCP servers</span></div>
+            </div>
+            <div class="featured-tags">
+              <span class="tag tag-blue">React</span>
+              <span class="tag tag-green">Node.js / Express</span>
+              <span class="tag tag-yellow">PostgreSQL</span>
+              <span class="tag tag-red">LLM agent</span>
+              <span class="tag">Stripe</span>
+              <span class="tag">OAuth 2.0</span>
+            </div>
+            <div class="featured-actions">
+              <a href="projects/onebotads.html" class="btn btn-primary">Case study</a>
+              <a href="https://onebotads.net" class="btn" target="_blank" rel="noopener">Live site</a>
+            </div>
+          </div>
+
+          <figure class="reveal">
+            <div class="window">
+              <div class="window-bar"><i></i><i></i><i></i><span>onebotads.net — Create Ad with AI</span></div>
+              <img src="assets/img/onebotads-ai-create.webp"
+                   alt="OneBotAds dashboard: the AI assistant chat on the left filling in a complete ad campaign form on the right, including budgets for Meta and LinkedIn and a live audience estimate"
+                   width="1400" height="1167" loading="eager">
+            </div>
+            <figcaption>The flagship feature: describe a campaign in chat, the agent fills and launches the real form.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EARLIER WORK ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Foundation — coursework that went deep</p>
+          <h2 class="display">Earlier work</h2>
+        </div>
+        <div class="bento">
+          <article class="card reveal" style="--index: 0">
+            <h3>Motorola 6809 processor simulator</h3>
+            <p>Reproduced the full 6809 CPU in software — instruction fetch, decode and execution
+               cycle implemented from scratch in Python.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">CPU architecture</span></div>
+          </article>
+          <article class="card reveal" style="--index: 1">
+            <h3>Linux server administration lab</h3>
+            <p>Ubuntu VMs administered entirely from the shell: users and permissions, services,
+               cron jobs, and real-time monitoring via Bash scripting.</p>
+            <div class="tags"><span class="tag">Linux</span><span class="tag">Bash</span></div>
+          </article>
+          <article class="card reveal" style="--index: 2">
+            <h3>Advanced database management</h3>
+            <p>Relational schemas with stored procedures, triggers, cursors and query optimisation —
+               Oracle running in Docker for reproducible environments.</p>
+            <div class="tags"><span class="tag">PL/SQL</span><span class="tag">Oracle</span><span class="tag">Docker</span></div>
+          </article>
+          <article class="card reveal" style="--index: 3">
+            <h3>Enterprise network simulation</h3>
+            <p>Multi-VLAN networks with inter-VLAN routing, DNS, DHCP and WAN links, designed and
+               simulated in Cisco Packet Tracer.</p>
+            <div class="tags"><span class="tag">Cisco PT</span><span class="tag">VLAN</span><span class="tag">DNS/DHCP</span></div>
+          </article>
+          <article class="card reveal" style="--index: 4">
+            <h3>Full-stack web applications</h3>
+            <p>Dynamic web apps with REST APIs, session management and responsive UI — PHP and
+               Node back-ends integrated with React front-ends.</p>
+            <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MySQL</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Toolkit</p>
+          <h2 class="display">What I work with</h2>
+        </div>
+        <div class="skills">
+          <div class="skill-group reveal" style="--index: 0">
+            <h3>Languages</h3>
+            <ul>
+              <li><span class="tag tag-blue">JavaScript</span></li>
+              <li><span class="tag tag-blue">Python</span></li>
+              <li><span class="tag tag-blue">Java</span></li>
+              <li><span class="tag tag-blue">C</span></li>
+              <li><span class="tag tag-blue">PHP</span></li>
+              <li><span class="tag tag-blue">SQL / PL-SQL</span></li>
+              <li><span class="tag tag-blue">Bash</span></li>
+            </ul>
+          </div>
+          <div class="skill-group reveal" style="--index: 1">
+            <h3>Web &amp; backend</h3>
+            <ul>
+              <li><span class="tag tag-green">React</span></li>
+              <li><span class="tag tag-green">Node.js / Express</span></li>
+              <li><span class="tag tag-green">Sequelize</span></li>
+              <li><span class="tag tag-green">REST APIs</span></li>
+              <li><span class="tag tag-green">OAuth 2.0</span></li>
+              <li><span class="tag tag-green">Stripe</span></li>
+            </ul>
+          </div>
+          <div class="skill-group reveal" style="--index: 2">
+            <h3>Systems &amp; networks</h3>
+            <ul>
+              <li><span class="tag tag-yellow">Linux / Ubuntu</span></li>
+              <li><span class="tag tag-yellow">nginx</span></li>
+              <li><span class="tag tag-yellow">PM2</span></li>
+              <li><span class="tag tag-yellow">DNS / DHCP</span></li>
+              <li><span class="tag tag-yellow">VLAN / WAN</span></li>
+            </ul>
+          </div>
+          <div class="skill-group reveal" style="--index: 3">
+            <h3>Data &amp; tools</h3>
+            <ul>
+              <li><span class="tag tag-red">PostgreSQL</span></li>
+              <li><span class="tag tag-red">Oracle</span></li>
+              <li><span class="tag tag-red">Docker</span></li>
+              <li><span class="tag tag-red">Git</span></li>
+              <li><span class="tag tag-red">MCP servers</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section class="section" id="education">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Academic path</p>
+          <h2 class="display">Education</h2>
+        </div>
+        <div class="rows reveal">
+          <div class="row">
+            <time>2025 — now</time>
+            <div>
+              <h3>Licence ST — Computer Engineering (LSGI)</h3>
+              <p>Faculty of Sciences and Technology, Settat. Advanced databases, OOP in Java,
+                 networks and operating systems, UML and software engineering.</p>
+            </div>
+            <span class="row-note">current</span>
+          </div>
+          <div class="row">
+            <time>2023 — 2025</time>
+            <div>
+              <h3>DEUST — Mathematics, Computer Science &amp; Physics (MIP)</h3>
+              <p>Data structures and algorithms in C, probability and statistics, numerical analysis.</p>
+            </div>
+            <span class="row-note"></span>
+          </div>
+          <div class="row">
+            <time>2023</time>
+            <div>
+              <h3>Baccalaureate — Science track</h3>
+              <p>Morocco.</p>
+            </div>
+            <span class="row-note">mention: good</span>
+          </div>
+        </div>
+        <p class="arch-note reveal" style="margin-top: var(--space-8)">
+          Languages: Arabic (native) &middot; French (fluent) &middot; English (professional).
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <p class="eyebrow reveal">Contact</p>
+        <h2 class="reveal">Let&rsquo;s build something together.</h2>
+        <p class="lede reveal">Open to full-stack roles and interesting projects — remote or on-site.
+           The fastest way to reach me is email.</p>
+        <div class="rows contact-rows reveal">
+          <a class="row" href="mailto:ayach.you.fst@uhp.ac.ma">
+            <span class="row-key">email</span>
+            <h3>ayach.you.fst@uhp.ac.ma</h3>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="row" href="tel:+212698869977">
+            <span class="row-key">phone</span>
+            <h3>+212 698 869 977</h3>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="row" href="https://github.com/YoussefAyach01" target="_blank" rel="noopener">
+            <span class="row-key">github</span>
+            <h3>YoussefAyach01</h3>
+            <span class="arrow" aria-hidden="true">&nearr;</span>
+          </a>
+          <a class="row" href="https://www.linkedin.com/in/ayachyoussef" target="_blank" rel="noopener">
+            <span class="row-key">linkedin</span>
+            <h3>ayachyoussef</h3>
+            <span class="arrow" aria-hidden="true">&nearr;</span>
+          </a>
+          <a class="row" href="assets/Ayach_Youssef_CV.pdf" download>
+            <span class="row-key">cv</span>
+            <h3>Ayach_Youssef_CV.pdf</h3>
+            <span class="arrow" aria-hidden="true">&darr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p>Ayach Youssef — Berrechid, Morocco</p>
+    <p><a href="#">Back to top</a></p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
