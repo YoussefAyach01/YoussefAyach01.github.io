@@ -679,3 +679,90 @@ figcaption {
     padding-block: var(--space-16) var(--space-8);
   }
 }
+
+/* ---------- Ship Log entries (markdown prose) ---------- */
+.log-row time {
+  min-width: 12ch;
+}
+.log-row h3 {
+  font-weight: 600;
+}
+
+.post-prose h2 {
+  font-family: var(--serif);
+  font-size: var(--text-xl);
+  letter-spacing: -0.02em;
+  margin: var(--space-16) 0 var(--space-4);
+}
+.post-prose h3 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: var(--space-12) 0 var(--space-3);
+}
+.post-prose p {
+  margin-bottom: var(--space-4);
+}
+.post-prose ul,
+.post-prose ol {
+  padding-left: 1.4em;
+  margin-bottom: var(--space-4);
+}
+.post-prose li {
+  margin-bottom: var(--space-2);
+}
+.post-prose li::marker {
+  color: var(--muted);
+}
+.post-prose blockquote {
+  border-left: 2px solid var(--border);
+  padding-left: var(--space-4);
+  color: var(--muted);
+  margin-bottom: var(--space-4);
+}
+.post-prose code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--pale-yellow);
+  color: var(--pale-yellow-ink);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.post-prose pre {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  overflow-x: auto;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+.post-prose pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+.post-prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--space-12) 0;
+}
+.post-prose table {
+  border-collapse: collapse;
+  margin-bottom: var(--space-6);
+  font-size: var(--text-sm);
+  display: block;
+  overflow-x: auto;
+}
+.post-prose th,
+.post-prose td {
+  border: 1px solid var(--border);
+  padding: var(--space-2) var(--space-4);
+  text-align: left;
+}
+.post-prose th {
+  font-family: var(--mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}

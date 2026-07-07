@@ -1,0 +1,51 @@
+---
+import Base from "./Base.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"log">;
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags } = post.data;
+const words = post.body ? post.body.split(/\s+/).length : 0;
+const minutes = Math.max(1, Math.round(words / 220));
+const dateFmt = date.toISOString().slice(0, 10).replaceAll("-", ".");
+---
+
+<Base title={`${title} — Ship Log — Ayach Youssef`} description={description}>
+  <article>
+    <header class="study-head container">
+      <p class="eyebrow">
+        <a href="/log/">ship.log</a> — entry {dateFmt} — {minutes} min read
+      </p>
+      <h1 class="display">{title}</h1>
+      <p class="lede">{description}</p>
+      {
+        tags.length > 0 && (
+          <div class="featured-tags" style="margin-top: var(--space-6)">
+            {tags.map((t) => (
+              <span class="tag">{t}</span>
+            ))}
+          </div>
+        )
+      }
+    </header>
+    <div class="section" style="border-top: 1px solid var(--border)">
+      <div class="container">
+        <div class="prose post-prose">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <section class="section">
+    <div class="container">
+      <div class="featured-actions">
+        <a href="/log/" class="btn">More entries</a>
+        <a href="/#contact" class="btn btn-primary">Work with me</a>
+      </div>
+    </div>
+  </section>
+</Base>

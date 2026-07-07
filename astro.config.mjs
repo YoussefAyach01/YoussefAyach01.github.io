@@ -5,4 +5,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://ayach.is-a.dev",
   integrations: [sitemap()],
+  markdown: {
+    shikiConfig: { theme: "vitesse-light" },
+  },
 });

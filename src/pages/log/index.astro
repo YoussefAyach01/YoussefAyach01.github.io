@@ -1,0 +1,52 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("log", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const fmt = (d: Date) => d.toISOString().slice(0, 10).replaceAll("-", ".");
+---
+
+<Base
+  title="Ship Log — Ayach Youssef"
+  description="Engineering notes by Ayach Youssef. Every entry is something shipped, or something learned shipping it."
+>
+  <section class="study-head container">
+    <p class="eyebrow">
+      ship.log — {posts.length}
+      {posts.length === 1 ? "entry" : "entries"}
+    </p>
+    <h1 class="display">Ship Log</h1>
+    <p class="lede">
+      Engineering notes with one rule: every entry is something I shipped, or
+      something I learned shipping it. No filler. <a href="/rss.xml"
+        >Subscribe via RSS</a
+      >.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="rows">
+        {
+          posts.map((post) => (
+            <a class="row log-row reveal" href={`/log/${post.id}/`}>
+              <time datetime={post.data.date.toISOString()}>
+                {fmt(post.data.date)}
+              </time>
+              <div>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+              </div>
+              <span class="arrow" aria-hidden="true">
+                &rarr;
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
