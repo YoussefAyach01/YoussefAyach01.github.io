@@ -22,9 +22,9 @@
   --pale-red-ink: #96362f;
 
   /* Type */
-  --serif: "Newsreader", "Georgia", serif;
+  --serif: "Newsreader Variable", "Georgia", serif;
   --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
-  --mono: "JetBrains Mono", "Consolas", monospace;
+  --mono: "JetBrains Mono Variable", "Consolas", monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;

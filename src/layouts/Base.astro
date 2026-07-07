@@ -1,4 +1,10 @@
 ---
+import "@fontsource-variable/newsreader/opsz.css";
+import "@fontsource-variable/newsreader/opsz-italic.css";
+import "@fontsource/instrument-sans/400.css";
+import "@fontsource/instrument-sans/500.css";
+import "@fontsource/instrument-sans/600.css";
+import "@fontsource-variable/jetbrains-mono/index.css";
 import "../styles/global.css";
 
 interface Props {
@@ -32,12 +38,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL("og-default.png", Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <script
+      is:inline
+      async
+      data-goatcounter="https://ayach.goatcounter.com/count"
+      src="https://gc.zgo.at/count.js"></script>
   </head>
   <body>
     <div class="glow" aria-hidden="true"></div>

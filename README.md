@@ -1,29 +1,35 @@
-# Portfolio — Ayach Youssef
+# ayach.is-a.dev — career platform
 
-Personal portfolio: hub page plus one case-study page per shipped project.
-Static HTML/CSS/JS — no build step, no framework, nothing to maintain.
+Portfolio, project case studies, Ship Log (blog), and live CV of Ayach Youssef.
+Astro (TypeScript strict), static output, zero client JS except a scroll-reveal
+observer and GoatCounter analytics.
 
 ## Run
 
-Open `index.html` in a browser, or serve the folder:
-
 ```
-npx serve .
+npm install
+npm run dev        # local dev server
+npm run build      # static build to dist/
+npm run check      # astro type check
+npm run lint       # prettier check
 ```
 
 ## Structure
 
-- `index.html` — the hub: hero + ship log, featured OneBotAds, earlier work, skills, education, contact
-- `projects/onebotads.html` — OneBotAds case study (the "presentation" page)
-- `styles.css` — shared design system (warm monochrome editorial)
-- `assets/img/` — optimized WebP screenshots; `assets/Ayach_Youssef_CV.pdf`
+- `src/pages/` — `/` hub · `/projects/` + case studies · `/log/` Ship Log · `/cv/` (print = 1-page PDF) · 404
+- `src/content/log/*.md` — blog posts (title/description/date/tags/draft frontmatter)
+- `src/layouts/` — `Base.astro` (chrome + meta), `Post.astro` (log entries)
+- `src/styles/global.css` — the design system (warm monochrome editorial)
 
-Adding a project: create `projects/<name>.html` (copy onebotads.html as the skeleton),
-add a card in the hub's work section.
+**New blog post** = drop a `.md` in `src/content/log/`. **New project** = page in
+`src/pages/projects/` + card on `/projects/`.
 
 ## Deploy
 
-GitHub Pages. Recommended: push to a repo named `YoussefAyach01.github.io`
-(serves at the root URL), Settings → Pages → deploy from `main` branch root.
+Push to `main` → GitHub Actions builds and deploys to GitHub Pages
+(`.github/workflows/deploy.yml`). Custom domain `ayach.is-a.dev` via
+[is-a-dev/register](https://github.com/is-a-dev/register) CNAME → `youssefayach01.github.io`.
 
-No environment variables — see `.env.example`.
+No environment variables (see `.env.example`). GitHub Pages can't set custom HTTP
+headers; if stricter security headers are ever needed, move hosting to Cloudflare
+Pages (`_headers` support) without changing the build.
