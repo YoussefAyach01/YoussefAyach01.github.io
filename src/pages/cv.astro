@@ -4,7 +4,7 @@ import Base from "../layouts/Base.astro";
 
 <Base
   title="CV — Ayach Youssef"
-  description="CV of Ayach Youssef, full-stack software engineer: OneBotAds (production SaaS), Jobistart, Digitalye, FST Settat. Print this page for a PDF copy."
+  description="CV of Ayach Youssef, software engineer focused on backend & DevOps: OneBotAds (production SaaS), Jobistart, Digitalye, FST Settat. Print this page for a PDF copy."
 >
   <section class="study-head container cv-tools">
     <p class="eyebrow">Curriculum vitae — always current</p>
@@ -27,7 +27,7 @@ import Base from "../layouts/Base.astro";
         <header class="cv-head">
           <div>
             <h2 class="display cv-name">Ayach Youssef</h2>
-            <p class="cv-role">Full-Stack Software Engineer</p>
+            <p class="cv-role">Software Engineer — Backend &amp; DevOps</p>
           </div>
           <ul class="cv-contact">
             <li>
@@ -54,10 +54,12 @@ import Base from "../layouts/Base.astro";
         <div class="cv-section">
           <h3 class="cv-h">Profile</h3>
           <p>
-            Full-stack engineer who took a SaaS product from a click-through
-            mockup to production in three months: six ad-platform integrations,
-            an LLM agent on MCP tool servers, and a 17-table PostgreSQL backend,
-            live at onebotads.net. I learn fast, and I ship.
+            Backend-focused engineer who took a SaaS product from a
+            click-through mockup to production in three months — and deployed
+            and operated it myself: six ad-platform integrations, an LLM agent
+            on isolated MCP tool servers, a 17-table PostgreSQL backend, all
+            running on a Linux VPS behind nginx and PM2. I also built the
+            frontend end to end. I learn fast, and I ship.
           </p>
         </div>
 
@@ -69,6 +71,11 @@ import Base from "../layouts/Base.astro";
               <span class="cv-date">Apr 2026 — present</span>
             </div>
             <ul>
+              <li>
+                Deployed and operate the product on a Linux VPS (PM2, nginx);
+                shipped to production June 23, 2026; delivered complete handoff
+                documentation (schema, API reference, deployment runbook).
+              </li>
               <li>
                 Built the entire backend of OneBotAds, an AI ad-automation SaaS,
                 from zero: PostgreSQL schema (17 tables), ~35 REST route groups,
@@ -83,11 +90,6 @@ import Base from "../layouts/Base.astro";
                 Designed the AI campaign agent: LLM orchestrating six MCP tool
                 servers spawned per-request with credential isolation; plus a
                 cron rule engine and Shopify→UTM→ROAS attribution pipeline.
-              </li>
-              <li>
-                Deployed and operate the product on a Linux VPS (PM2, nginx);
-                shipped to production June 23, 2026; delivered complete handoff
-                documentation (schema, API reference, deployment runbook).
               </li>
             </ul>
           </div>
@@ -137,12 +139,12 @@ import Base from "../layouts/Base.astro";
           <div>
             <h3 class="cv-h">Skills</h3>
             <p class="cv-skills">
+              <strong>Infrastructure &amp; DevOps:</strong> Linux, Docker, nginx,
+              PM2, GitHub Actions (CI/CD), Git, DNS/DHCP, VLAN/WAN<br />
               <strong>Languages:</strong> JavaScript/TypeScript, Python, Java, C,
               PHP, SQL/PL-SQL, Bash<br />
               <strong>Web:</strong> React, Node.js/Express, Sequelize, REST, OAuth
               2.0, Stripe, Astro<br />
-              <strong>Systems:</strong> Linux, nginx, PM2, Docker, Git, DNS/DHCP,
-              VLAN/WAN<br />
               <strong>Data &amp; AI:</strong> PostgreSQL, Oracle, MySQL, MCP servers,
               LLM agents
             </p>
