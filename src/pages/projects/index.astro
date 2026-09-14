@@ -64,4 +64,136 @@ import Window from "../../components/Window.astro";
       </p>
     </div>
   </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Sep 2026 — 10-project sprint</p>
+        <h2 class="display">Backend &amp; DevOps, in ten small builds</h2>
+        <p class="lede">
+          Each one scoped small on purpose, built to the same bar: README,
+          <code>.env.example</code>, real tests, clean git history. Picked to
+          cover ground OneBotAds doesn't — new languages, IaC, observability,
+          hardened auth.
+        </p>
+      </div>
+      <div class="bento">
+        <article class="card reveal" style="--index: 0">
+          <h3>deploy-pipeline</h3>
+          <p>
+            Dockerized app + GitHub Actions CI/CD + Ansible playbook for
+            provisioning a VPS from scratch — nginx, TLS, the works.
+          </p>
+          <div class="tags">
+            <span class="tag">Docker</span><span class="tag">Ansible</span
+            ><span class="tag">GitHub Actions</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 1">
+          <h3>task-api-hardened</h3>
+          <p>
+            Fastify task API with Redis-backed rate limiting and caching,
+            structured logging, cache invalidation on writes.
+          </p>
+          <div class="tags">
+            <span class="tag">Fastify</span><span class="tag">Redis</span
+            ><span class="tag">PostgreSQL</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 2">
+          <h3>observability-stack</h3>
+          <p>
+            Prometheus + Grafana, provisioned as code, scraping
+            task-api-hardened's <code>/metrics</code> for live dashboards.
+          </p>
+          <div class="tags">
+            <span class="tag">Prometheus</span><span class="tag">Grafana</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 3">
+          <h3>ci-status</h3>
+          <p>
+            A Go CLI — my first Go project — that prints the latest GitHub
+            Actions run across several repos and can poll until it finishes.
+          </p>
+          <div class="tags">
+            <span class="tag">Go</span><span class="tag">GitHub API</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 4">
+          <h3>do-vm-terraform</h3>
+          <p>
+            A Terraform module provisioning a DigitalOcean droplet, firewall
+            and DNS record — the declarative counterpart to deploy-pipeline's
+            Ansible. Tested against a mocked provider in CI.
+          </p>
+          <div class="tags">
+            <span class="tag">Terraform</span><span class="tag"
+              >DigitalOcean</span
+            >
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 5">
+          <h3>live-room</h3>
+          <p>
+            A real-time poll room — votes and presence sync instantly across
+            every connected client over WebSockets.
+          </p>
+          <div class="tags">
+            <span class="tag">Socket.io</span><span class="tag">Express</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 6">
+          <h3>auth-service</h3>
+          <p>
+            JWT auth with refresh-token rotation and reuse detection,
+            argon2id hashing, rate-limited login — an OWASP checklist applied
+            deliberately, not assumed.
+          </p>
+          <div class="tags">
+            <span class="tag">JWT</span><span class="tag">argon2id</span
+            ><span class="tag">OWASP</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 7">
+          <h3>strict-env</h3>
+          <p>
+            A zero-dependency typed env-var validator, published as a dual
+            ESM/CJS package — my first open-source npm package.
+          </p>
+          <div class="tags">
+            <span class="tag">TypeScript</span><span class="tag">npm</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 8">
+          <h3>weather-pulse</h3>
+          <p>
+            A cron job collecting real weather data into Postgres, served
+            through a zero-JS, server-rendered dashboard.
+          </p>
+          <div class="tags">
+            <span class="tag">node-cron</span><span class="tag"
+              >PostgreSQL</span
+            >
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 9">
+          <h3>termdle</h3>
+          <p>A terminal Wordle clone — the deliberately just-for-fun slot.</p>
+          <div class="tags">
+            <span class="tag">TypeScript</span><span class="tag">CLI</span>
+          </div>
+        </article>
+      </div>
+      <p class="arch-note reveal" style="margin-top: var(--space-16)">
+        Source for all ten is on <a
+          href="https://github.com/YoussefAyach01"
+          target="_blank"
+          rel="noopener">GitHub</a
+        >. A few (the ones needing a VPS or cloud account to actually run
+        live) are code-complete and fully tested but not yet deployed to a
+        public URL — each project's own README says exactly what's left.
+      </p>
+    </div>
+  </section>
 </Base>
