@@ -13,12 +13,12 @@ It's easy to say "infrastructure as code" and mean "I wrote a script once." Here
 
 ## Scoping honestly when the plan changes
 
-This was originally scoped to monitor a VPS — the one `deploy-pipeline` provisions. That VPS doesn't exist yet (real account, real billing, not something to fake), so I adapted the target: Prometheus scrapes the containerized app stack directly instead. The monitoring _approach_ — scrape config + provisioned dashboard — is identical either way; only the target line in `prometheus.yml` changes. When the VPS exists, pointing this at it is a one-line edit, not a rebuild.
+This was originally scoped to monitor a VPS — the one `deploy-pipeline` provisions. That VPS doesn't exist yet, since standing one up needs a real DigitalOcean account and a billing decision, so I pointed Prometheus at the containerized app stack directly instead. Nothing about the monitoring approach changes — scrape config plus a provisioned dashboard is the same either way — only the target line in `prometheus.yml` differs. Once the VPS exists, repointing this is a one-line edit.
 
-That's the actual lesson: decouple the skill you're practicing from the specific infrastructure it happens to be pointed at, and a blocked dependency stops being a blocker.
+Useful thing to notice for the rest of this sprint: the skill I was practicing (scrape + provision a dashboard as code) never actually depended on the specific box being monitored. Separating those two let a missing VPS stop being a blocker at all.
 
-## What's still open
+## What I actually checked
 
-Verified locally: both Prometheus targets report `up`, Grafana reports healthy, and the dashboard renders real traffic when you generate some load against the API. No alerting (Alertmanager) yet, and no long-term metrics retention — Prometheus's local TSDB is fine for a portfolio demo, not for production retention needs.
+Checked locally: both Prometheus targets report `up`, Grafana reports healthy, and the dashboard shows real numbers once you throw some load at the API. No alerting via Alertmanager yet — dashboards only — and no long-term retention backend, so Prometheus's local TSDB is what's holding the history, which is fine for a demo and would need swapping out for anything production-scale.
 
-_Part of a 10-project sprint to build genuine backend/DevOps breadth. Repo: [observability-stack](https://github.com/YoussefAyach01/observability-stack)._
+_Repo: [observability-stack](https://github.com/YoussefAyach01/observability-stack) — project #3 of a 10-project sprint building out real backend/DevOps signal._

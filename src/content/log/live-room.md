@@ -7,20 +7,20 @@ tags: ["WebSockets", "Socket.io", "real-time", "ship-sprint"]
 
 Every other backend project this sprint is request/response: a client asks, the server answers. `live-room` is the deliberate exception — join a URL, vote, and watch the results and participant count update instantly for everyone else in the room, pushed from the server the moment something changes.
 
-## Rooms as a URL, not a database row
+## A room is just whatever's in the URL
 
-There's no room-creation flow. A room is just whatever string sits in `?room=demo` — anyone who opens the same URL joins the same room. No auth, no signup. That's not a shortcut I took because I ran out of time; it's the actual design, because the point of this project is demonstrating real-time architecture, not building a product with user accounts. Adding auth would have diluted what the project is for.
+There's no room-creation flow. Open `?room=demo` and you're in room "demo," same as anyone else who opens that link — no auth, no signup, no database row representing the room. I left it that way because the thing I wanted to demonstrate was the WebSocket architecture, and a signup flow would have eaten the time budget without teaching me anything new.
 
-## Presence is a connection, not a person
+## What "presence" actually counts
 
-Presence is tracked per Socket.io connection — `connect`/`disconnect` — not per browser or per person. Open two tabs to the same room and the count goes up by two. That's an honest trade-off worth stating plainly rather than letting someone assume it's smarter than it is: "presence" here means "open sockets," which is the right primitive for a demo and the wrong one if you ever needed to know unique humans.
+Presence is tracked per Socket.io connection, not per person — open two tabs to the same room and the count goes up by two. Worth being upfront about: "presence" here means open sockets, not unique humans. Fine for a demo, wrong number if you ever needed to know how many people were actually in the room.
 
-## Testing a WebSocket flow end to end
+## Testing two clients, not one request
 
-The smoke test spins the server up in-process and connects two real Socket.io clients against it — not mocks — then asserts that a vote from one client shows up as a broadcast on the other, and that presence count changes on connect/disconnect. Testing real-time behavior means testing the _interaction_ between two clients, not just that one request returns the right JSON; a unit test on the vote-counting function alone wouldn't have caught a broadcast that never reaches the second client.
+The smoke test spins the server up in-process and connects two real Socket.io clients — not mocks — then checks that a vote cast from one shows up as a broadcast on the other, and that the presence count moves on connect/disconnect. A unit test on the vote-counting function in isolation wouldn't have caught a broadcast that silently never reaches the second client, which is the actual failure mode real-time code has that request/response code doesn't.
 
-## What's still open
+## The honest limits
 
-State is entirely in-memory, which means it resets on restart and doesn't survive multiple server instances — fine for a single-instance demo, and a real multi-instance deployment would need `@socket.io/redis-adapter` to share state across processes, which is documented rather than silently missing. Deploying needs a Fly.io or Render account (WebSockets need a host that keeps a persistent connection open, which rules out some serverless platforms without extra config).
+State lives entirely in memory — resets on restart, doesn't survive more than one server instance. Fine for a single-instance demo; a real multi-instance deployment would need `@socket.io/redis-adapter` to share state across processes, and the README says so rather than leaving it as a surprise. Not deployed yet — needs a Fly.io or Render account, and WebSockets specifically need a host that holds a persistent connection open, which rules out some serverless platforms without extra config.
 
-_Part of a 10-project sprint to build genuine backend/DevOps breadth. Repo: [live-room](https://github.com/YoussefAyach01/live-room)._
+_Repo: [live-room](https://github.com/YoussefAyach01/live-room) — project #6 of a 10-project sprint building out real backend/DevOps signal._

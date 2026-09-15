@@ -1,26 +1,26 @@
 ---
-title: "A collector, not a CRUD app: weather-pulse"
+title: "Building something that acts without being asked: weather-pulse"
 description: "A cron-scheduled service that snapshots real weather data into Postgres every 15 minutes, rendered through a dashboard with zero client-side JavaScript."
 date: 2026-09-13
 tags: ["cron", "PostgreSQL", "server-rendered", "ship-sprint"]
 ---
 
-Most of this sprint's backend projects react to requests. `weather-pulse` is a different pattern entirely: it _acts on a schedule_, pulling real weather data for a handful of cities from the Open-Meteo API every 15 minutes and appending it to Postgres, whether or not anyone's looking at the dashboard right now.
+Most of this sprint's backend projects react to requests. `weather-pulse` acts on its own schedule instead — pulling real weather data for a handful of cities from the Open-Meteo API every 15 minutes and appending it to Postgres, whether anyone's looking at the dashboard or not.
 
-## Append-only as a design choice, not a limitation
+## Never updating a row, only adding one
 
-Readings are never updated or deleted — every collection run inserts new rows. That means the dashboard is always reconstructable from raw history; there's no "current state" to get out of sync with reality, because there is no mutable current state, only an ever-growing log of what was actually observed. The sparkline on the dashboard is just the last 20 readings per city, read straight off that log.
+Readings never get updated or deleted; every run just inserts new rows. The upside took me a bit to appreciate: the dashboard is always reconstructable from raw history, because there's no mutable "current state" that could ever drift out of sync with what actually happened — just a growing log. The sparkline is nothing more than the last 20 readings per city, read straight off that log.
 
-## Zero client-side JavaScript, on purpose
+## How far plain HTML actually gets you
 
-The dashboard is fully server-rendered HTML, with the trend line drawn as inline SVG computed server-side and a `<meta http-equiv="refresh">` tag doing the auto-updating instead of a JavaScript polling loop. That's not a limitation I hit and worked around — it's a constraint I chose, specifically to see how far "plain HTML, no framework, no bundler, no client dependency footprint" actually gets you for a genuinely useful dashboard. Answer: further than expected. A sparkline doesn't need React.
+The dashboard is server-rendered HTML with the trend line as inline SVG computed on the server, and a `<meta http-equiv="refresh">` tag handling the auto-update instead of any JS polling loop. I picked that constraint on purpose, curious how far "no framework, no bundler, zero client dependencies" would carry a dashboard that still needed to look decent. Further than I expected — a sparkline really doesn't need React.
 
-## Failure isolation in the collector itself
+## One bad city shouldn't sink the rest
 
-`collectOnce()` fetches all cities in a run, and if one city's request fails, the others still get collected and stored — one bad response doesn't abort the whole run. This is the kind of thing that's invisible until the one time a single upstream API call times out at 3am and either takes down every other city's data with it or doesn't, depending on whether anyone thought about it in advance.
+`collectOnce()` loops over every configured city, and if one request fails, the rest still get collected and stored. Easy to skip this when you're building the happy path first, and it's exactly the kind of gap that only becomes visible the one time a single upstream call times out and quietly takes the whole run down with it.
 
-## What's still open
+## Running, but not deployed
 
-The smoke test triggers a real collection run against the live Open-Meteo API — not a mock — and confirms the dashboard renders the resulting readings; `/collect-now` gave five real cities' data on first manual trigger. Scheduling is in-process (`node-cron` inside the same server), which is simpler to deploy but means a scheduled run is lost if the process happens to be down — an acceptable trade for a single-instance portfolio project, and the README says so rather than hiding it. Deploying live needs the same VPS `deploy-pipeline` provisions, since cron/collection wants a long-running process rather than a serverless function.
+The smoke test triggers a real collection run against the live Open-Meteo API, not a mock, and checks the dashboard renders what came back — `/collect-now` returned real data for all five configured cities on the first manual trigger. Scheduling runs in-process via `node-cron` inside the same server, simpler to deploy but meaning a scheduled run is skipped if the process happens to be down; an acceptable trade at this scale, and the README states it rather than leaving it as a surprise. Not deployed live — needs the same VPS `deploy-pipeline` provisions, since cron work wants a long-running process rather than a serverless one.
 
-_Part of a 10-project sprint to build genuine backend/DevOps breadth. Repo: [weather-pulse](https://github.com/YoussefAyach01/weather-pulse)._
+_Repo: [weather-pulse](https://github.com/YoussefAyach01/weather-pulse) — project #9 of a 10-project sprint building out real backend/DevOps signal._

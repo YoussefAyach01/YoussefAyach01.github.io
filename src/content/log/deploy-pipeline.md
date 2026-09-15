@@ -13,14 +13,14 @@ Push to `main` and a GitHub Actions workflow typechecks and builds the app, then
 
 That's the whole shape: **Ansible builds the box, GitHub Actions ships the code, nginx fronts it.** Two different automation tools doing two different jobs, not one tool stretched to cover both.
 
-## The decision that mattered: keep the app boring
+## Keeping the app boring so the pipeline gets the hours
 
-It would have been easy to let the link-shortener grow features and let the pipeline stay an afterthought. I inverted that on purpose — the API is Express + Postgres and nothing else, so every hour spent went into the deploy path: secrets management via GitHub Actions secrets (not committed anywhere), a documented one-time infra setup, and an honest "what this doesn't do" section (no blue-green deploy, no automated backups, no secrets manager beyond repo secrets).
+It would've been easy to let the link-shortener grow features and let the pipeline stay an afterthought — that's how most side projects end up. I capped it instead: Express and Postgres, nothing else, so the actual hours went into the deploy path — secrets in GitHub Actions secrets rather than anywhere committed, a one-time infra setup written down step by step, and a README section that lists what this doesn't do (no blue-green deploy, no automated backups, no secrets manager beyond repo secrets) instead of pretending those gaps aren't there.
 
-Writing down what you _didn't_ build is as useful as writing down what you did — it's the difference between "small scope" and "didn't think about it."
+Writing the missing pieces down turned out to matter more than I expected — it's the only way "small scope" reads differently from "didn't think about it."
 
-## What's still open
+## What's left before this is actually deployed
 
-Code-complete, containerized, and smoke-tested locally via `docker compose up`. Not yet applied to a real droplet — that's a real DigitalOcean account and billing decision, not something to fake. The README documents the exact one-time setup (`ansible-playbook ... -e domain_name=...`, then `certbot`) so provisioning is a "when," not a "how."
+Code-complete, containerized, smoke-tested locally with `docker compose up`. Not applied to a real droplet yet — that needs an actual DigitalOcean account and a billing decision I'm not going to fake my way around. The one-time setup is spelled out in the README (`ansible-playbook ... -e domain_name=...`, then `certbot`), so provisioning is a matter of when I get to it, not a mystery.
 
-_Part of a 10-project sprint to build genuine backend/DevOps breadth. Repo: [deploy-pipeline](https://github.com/YoussefAyach01/deploy-pipeline)._
+_Repo: [deploy-pipeline](https://github.com/YoussefAyach01/deploy-pipeline) — project #1 of a 10-project sprint building out real backend/DevOps signal._

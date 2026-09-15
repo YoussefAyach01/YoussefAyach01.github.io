@@ -17,8 +17,8 @@ That last check matters more than it sounds: the firewall variable has no defaul
 
 Writing the firewall resource, I tried to index into a `set`-typed block the way you'd index a list — and Terraform doesn't allow it, because a `set` is unordered and has no stable index. The fix was restructuring the firewall rule as the provider actually expects: a block that Terraform manages by content, not position. It's a small thing, but it's the kind of error that only shows up once you've actually tried to reference a real attribute of a real resource type, which is exactly what writing a genuine (if mock-provider-tested) module forces you to do that reading docs doesn't.
 
-## What's still open
+## What I still need to do
 
-Fully `terraform validate`-clean, `terraform fmt`-clean, and test-suite green — the same validation bar as if it had actually been applied. The honest gap: it hasn't provisioned a real droplet and torn it down, because that needs a DigitalOcean account, billing, and an API token — a real spending decision that isn't mine to make automatically. `terraform apply` / `terraform destroy` are one command away once that account exists.
+`terraform validate` and `terraform fmt -check` are clean, and the test suite is green — the same bar it'd need to clear if it had actually been applied. The real gap: no droplet has actually been spun up and torn down, because that takes a DigitalOcean account, billing, and an API token, and that's a spending decision I'm making myself, not something to skip past. `terraform apply` / `terraform destroy` are one command away once the account exists.
 
-_Part of a 10-project sprint to build genuine backend/DevOps breadth. Repo: [do-vm-terraform](https://github.com/YoussefAyach01/do-vm-terraform)._
+_Repo: [do-vm-terraform](https://github.com/YoussefAyach01/do-vm-terraform) — project #5 of a 10-project sprint building out real backend/DevOps signal._

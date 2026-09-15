@@ -15,10 +15,10 @@ I'd already pushed several repos this sprint, each with its own CI, and checking
 
 Truncating a commit message for display, I sliced the string by byte length. That's fine for ASCII and silently wrong for anything with multi-byte UTF-8 characters — a commit message with an emoji or accented character gets cut mid-character, corrupting the output. The fix is truncating by _rune_ count, not byte count, using Go's `[]rune` conversion.
 
-This is a Go-specific trap in a way it isn't in some other languages: Go strings are byte slices, not rune slices, and `len(s)` counts bytes. The type checker has no opinion about whether that's what you meant. A real test — not a manual check — caught it, which is the actual point: new-language mistakes are exactly where a test suite earns its keep, because your intuition for "obviously correct" hasn't calibrated yet.
+Go strings are byte slices under the hood, so `len(s)` counts bytes, and the compiler has no opinion about whether that's what you actually wanted. A test caught it — I hadn't tried a non-ASCII commit message by hand, and probably wouldn't have thought to. That's more or less the shape of every new-language mistake I expect from here: things my instinct for "obviously fine" hasn't calibrated to yet, which a test suite catches and a glance at the code doesn't.
 
-## What's still open
+## What's shipped and what I'd add next
 
-`go vet`, `gofmt`, and a full test suite (mocked HTTP server) all pass, and it's smoke-tested against this portfolio's own repo. Ships as GitHub Release binaries via a tag-triggered Actions workflow, not a hosted service — a CLI doesn't need a server. Next: JSON output mode for scripting, and filtering to a specific workflow file instead of "most recent run overall."
+`go vet`, `gofmt`, and a full test suite against a mocked HTTP server all pass, and I smoke-tested it against this portfolio repo's own Actions runs. It ships as GitHub Release binaries through a tag-triggered workflow rather than a hosted service — no server needed for a CLI. Next on the list: a JSON output mode for scripting, and filtering to one specific workflow file instead of just the most recent run overall.
 
-_Part of a 10-project sprint to build genuine backend/DevOps breadth. Repo: [ci-status](https://github.com/YoussefAyach01/ci-status)._
+_Repo: [ci-status](https://github.com/YoussefAyach01/ci-status) — project #4 of a 10-project sprint building out real backend/DevOps signal._
