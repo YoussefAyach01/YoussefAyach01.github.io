@@ -19,4 +19,4 @@ Wordle's classic edge case: guess a letter twice when the answer only contains i
 
 Full test suite green, scoring algorithm and CLI loop both covered end to end. No real dictionary check on guesses (any 5 letters go through) and no stats persisted between runs — this was meant to stay small and fun, not turn into a real word game with a backlog of its own.
 
-_Repo: [termdle](https://github.com/YoussefAyach01/termdle) — project #10 of a 10-project sprint building out real backend/DevOps signal._
+_Code: [termdle](https://github.com/YoussefAyach01/termdle) — and yes, you can `npm run play` it yourself._

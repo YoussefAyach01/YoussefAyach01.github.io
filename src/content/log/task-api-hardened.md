@@ -5,7 +5,7 @@ date: 2026-09-13
 tags: ["Fastify", "Redis", "rate limiting", "observability", "ship-sprint"]
 ---
 
-`task-api-hardened` is a small task-list API — create, list, update, delete. Nobody would call that impressive on its own. The point of this project is everything wrapped around it: the layer that turns a CRUD toy into something you'd actually trust in front of real traffic.
+`task-api-hardened` is a small task-list API — create, list, update, delete — and none of those four endpoints is the interesting part. What I actually spent the time on: making sure a repeat `GET` doesn't hit Postgres every time, that nobody can hammer `/tasks` a thousand times a second, and that if something's slow at 3am I can find out why without SSHing in and guessing.
 
 ## Rate limiting that survives more than one instance
 
@@ -25,6 +25,6 @@ Fastify's built-in pino logger emits one JSON line per request — method, path,
 
 ## What's tested and what isn't done yet
 
-Smoke-tested locally against a real docker-compose run, and the test suite checks more than "does it boot" — it asserts the cache actually hits on a repeat `GET` and clears after a write. Not deployed live yet; that needs a Fly.io account plus managed Postgres and Redis, which is the next step rather than something left half-done.
+The test suite checks more than "does it boot" — it runs against a live docker-compose stack and asserts the cache actually hits on a repeat `GET` and clears right after a write. Not deployed yet; that's a Fly.io account and a managed Postgres/Redis away, the next concrete step rather than a loose end.
 
-_Repo: [task-api-hardened](https://github.com/YoussefAyach01/task-api-hardened) — project #2 of a 10-project sprint building out real backend/DevOps signal._
+_Code: [task-api-hardened](https://github.com/YoussefAyach01/task-api-hardened) — the `/metrics` it exposes gets scraped by [observability-stack](/log/observability-stack/)._

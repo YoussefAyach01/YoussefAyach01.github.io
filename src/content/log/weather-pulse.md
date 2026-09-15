@@ -23,4 +23,4 @@ The dashboard is server-rendered HTML with the trend line as inline SVG computed
 
 The smoke test triggers a real collection run against the live Open-Meteo API, not a mock, and checks the dashboard renders what came back — `/collect-now` returned real data for all five configured cities on the first manual trigger. Scheduling runs in-process via `node-cron` inside the same server, simpler to deploy but meaning a scheduled run is skipped if the process happens to be down; an acceptable trade at this scale, and the README states it rather than leaving it as a surprise. Not deployed live — needs the same VPS `deploy-pipeline` provisions, since cron work wants a long-running process rather than a serverless one.
 
-_Repo: [weather-pulse](https://github.com/YoussefAyach01/weather-pulse) — project #9 of a 10-project sprint building out real backend/DevOps signal._
+_Code: [weather-pulse](https://github.com/YoussefAyach01/weather-pulse)._

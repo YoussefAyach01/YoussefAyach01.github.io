@@ -21,4 +21,4 @@ Useful thing to notice for the rest of this sprint: the skill I was practicing (
 
 Checked locally: both Prometheus targets report `up`, Grafana reports healthy, and the dashboard shows real numbers once you throw some load at the API. No alerting via Alertmanager yet — dashboards only — and no long-term retention backend, so Prometheus's local TSDB is what's holding the history, which is fine for a demo and would need swapping out for anything production-scale.
 
-_Repo: [observability-stack](https://github.com/YoussefAyach01/observability-stack) — project #3 of a 10-project sprint building out real backend/DevOps signal._
+_Code: [observability-stack](https://github.com/YoussefAyach01/observability-stack)._

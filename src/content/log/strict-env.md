@@ -27,4 +27,4 @@ Every other project in this sprint is a service — I control both ends, so slop
 
 Zero dependencies, full test suite green, both module builds verified against each other. Not on npm yet — that's an `NPM_TOKEN` secret in the CI workflow away, which needs my own npm account and login, the one manual step standing between `git push --follow-tags` and an actual published version.
 
-_Repo: [strict-env](https://github.com/YoussefAyach01/strict-env) — project #8 of a 10-project sprint building out real backend/DevOps signal._
+_Code: [strict-env](https://github.com/YoussefAyach01/strict-env)._

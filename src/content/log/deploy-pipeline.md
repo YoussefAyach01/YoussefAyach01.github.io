@@ -5,7 +5,7 @@ date: 2026-09-13
 tags: ["CI/CD", "Ansible", "Docker", "GitHub Actions", "ship-sprint"]
 ---
 
-The first project in a 10-project sprint to build out real backend/DevOps signal, `deploy-pipeline` is deliberately small on the app side — a link-shortener API — so all the effort goes into the part that's usually invisible on a portfolio: how code actually gets from a push to a running server.
+First project in a ten-project sprint to build out real backend/DevOps signal, and I picked the smallest possible app on purpose: a link-shortener API. The point was never the shortener — it's how code actually gets from a push to a running server, the part that's usually invisible on a portfolio.
 
 ## What "the pipeline" means, concretely
 
@@ -23,4 +23,4 @@ Writing the missing pieces down turned out to matter more than I expected — it
 
 Code-complete, containerized, smoke-tested locally with `docker compose up`. Not applied to a real droplet yet — that needs an actual DigitalOcean account and a billing decision I'm not going to fake my way around. The one-time setup is spelled out in the README (`ansible-playbook ... -e domain_name=...`, then `certbot`), so provisioning is a matter of when I get to it, not a mystery.
 
-_Repo: [deploy-pipeline](https://github.com/YoussefAyach01/deploy-pipeline) — project #1 of a 10-project sprint building out real backend/DevOps signal._
+_Code and the one-time infra setup: [deploy-pipeline](https://github.com/YoussefAyach01/deploy-pipeline)._

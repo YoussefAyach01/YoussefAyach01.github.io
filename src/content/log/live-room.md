@@ -23,4 +23,4 @@ The smoke test spins the server up in-process and connects two real Socket.io cl
 
 State lives entirely in memory — resets on restart, doesn't survive more than one server instance. Fine for a single-instance demo; a real multi-instance deployment would need `@socket.io/redis-adapter` to share state across processes, and the README says so rather than leaving it as a surprise. Not deployed yet — needs a Fly.io or Render account, and WebSockets specifically need a host that holds a persistent connection open, which rules out some serverless platforms without extra config.
 
-_Repo: [live-room](https://github.com/YoussefAyach01/live-room) — project #6 of a 10-project sprint building out real backend/DevOps signal._
+_Code: [live-room](https://github.com/YoussefAyach01/live-room)._

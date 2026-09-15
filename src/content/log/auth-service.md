@@ -25,4 +25,4 @@ None of these show up from hitting the API with curl. They're the kind of thing 
 
 The full flow — register, login, protected route, refresh rotation, rejection of a reused refresh token, logout revocation — is smoke-tested against a real Postgres instance through docker-compose, nothing mocked. Missing: email verification and password reset (registration is immediate right now), and any OAuth/social login — I kept it to email and password so the auth mechanics stayed the focus instead of spreading across three different sign-in paths.
 
-_Repo: [auth-service](https://github.com/YoussefAyach01/auth-service) — project #7 of a 10-project sprint building out real backend/DevOps signal._
+_Code: [auth-service](https://github.com/YoussefAyach01/auth-service)._

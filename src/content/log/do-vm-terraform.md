@@ -21,4 +21,4 @@ Writing the firewall resource, I tried to index into a `set`-typed block the way
 
 `terraform validate` and `terraform fmt -check` are clean, and the test suite is green — the same bar it'd need to clear if it had actually been applied. The real gap: no droplet has actually been spun up and torn down, because that takes a DigitalOcean account, billing, and an API token, and that's a spending decision I'm making myself, not something to skip past. `terraform apply` / `terraform destroy` are one command away once the account exists.
 
-_Repo: [do-vm-terraform](https://github.com/YoussefAyach01/do-vm-terraform) — project #5 of a 10-project sprint building out real backend/DevOps signal._
+_Code: [do-vm-terraform](https://github.com/YoussefAyach01/do-vm-terraform), including the mock-provider test suite._

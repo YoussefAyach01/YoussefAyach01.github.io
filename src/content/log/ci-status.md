@@ -21,4 +21,4 @@ Go strings are byte slices under the hood, so `len(s)` counts bytes, and the com
 
 `go vet`, `gofmt`, and a full test suite against a mocked HTTP server all pass, and I smoke-tested it against this portfolio repo's own Actions runs. It ships as GitHub Release binaries through a tag-triggered workflow rather than a hosted service — no server needed for a CLI. Next on the list: a JSON output mode for scripting, and filtering to one specific workflow file instead of just the most recent run overall.
 
-_Repo: [ci-status](https://github.com/YoussefAyach01/ci-status) — project #4 of a 10-project sprint building out real backend/DevOps signal._
+_Code and releases: [ci-status](https://github.com/YoussefAyach01/ci-status)._
