@@ -1,0 +1,298 @@
+---
+import Base from "../../layouts/Base.astro";
+import Window from "../../components/Window.astro";
+import galleryFr from "../../assets/img/site-kit-gallery-fr.webp";
+import galleryAr from "../../assets/img/site-kit-gallery-ar.webp";
+import demoRiad from "../../assets/img/site-kit-demo-riad.webp";
+import demoLawAr from "../../assets/img/site-kit-demo-law-ar.webp";
+import phoneYoga from "../../assets/img/site-kit-phone-yoga.webp";
+---
+
+<Base
+  title="Site Kit — case study — Ayach Youssef"
+  description="Site Kit: one small TypeScript engine that builds 60 business websites in French and Arabic. How it works, what its 497 tests protect, and how it was built with AI coding agents."
+>
+  <!-- ============ TITLE ============ -->
+  <section class="study-head container">
+    <p class="eyebrow">Case study — side project, 2026</p>
+    <h1 class="display">Site Kit</h1>
+    <p class="lede">
+      One small engine that builds a complete website for a local business, in
+      French and in Arabic, from a single content file. It currently builds 60
+      of them — a riad, a law firm, a plumber, a pet shop — and all 60 are live.
+    </p>
+
+    <div class="meta-band">
+      <div class="meta-cell">
+        <span class="eyebrow">Role</span>
+        <p>Direction and review; built with AI coding agents</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Timeline</span>
+        <p>September — November 2026</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Stack</span>
+        <p>TypeScript &middot; plain HTML &amp; CSS &middot; Vitest</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Status</span>
+        <p>
+          Live at <a
+            href="https://ayach.is-a.dev/site-kit/"
+            target="_blank"
+            rel="noopener">ayach.is-a.dev/site-kit</a
+          >
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PROBLEM ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">The problem</p>
+        <h2 class="display">Two languages, sixty trades, one person</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          A small business in Morocco needs its website in French and in Arabic.
+          Arabic reads right to left, so that is two layouts, not one page run
+          through a translator. Building each site by hand does not scale past a
+          handful, and a page builder gives every business the same look.
+        </p>
+        <p>
+          Site Kit takes the other route: the structure is written once, and
+          each business is only data. Adding a business means adding <strong
+            >one content file and one colour file</strong
+          >. Nothing else changes, and the tests cover the new site without
+          anyone writing a new test.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">How it works</p>
+        <h2 class="display">Six small decisions</h2>
+      </div>
+      <div class="bento">
+        <article class="card reveal" style="--index: 0">
+          <h3>One typed file per business</h3>
+          <p>
+            Name, services, prices in dirhams, opening hours, WhatsApp number —
+            every text field holds its French and its Arabic side by side, so a
+            missing translation is a type error, not a surprise in production.
+          </p>
+          <div class="tags">
+            <span class="tag">TypeScript</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 1">
+          <h3>One renderer, two directions</h3>
+          <p>
+            The same function renders both languages. The layout uses CSS
+            logical properties (<code>margin-inline</code>, not
+            <code>margin-left</code>), so the Arabic page mirrors itself with no
+            second stylesheet.
+          </p>
+          <div class="tags">
+            <span class="tag">RTL</span><span class="tag">CSS</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 2">
+          <h3>A theme is eight variables</h3>
+          <p>
+            Each business gets its own palette, corner radius and display font
+            in a short CSS file. The riad and the garage share every line of
+            structure and look nothing alike.
+          </p>
+          <div class="tags">
+            <span class="tag">CSS custom properties</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 3">
+          <h3>No server, no runtime dependencies</h3>
+          <p>
+            The build writes plain HTML and CSS. Each site lands in its own
+            self-contained folder, so one of them can be handed to a client and
+            hosted anywhere without the other fifty-nine.
+          </p>
+          <div class="tags">
+            <span class="tag">Static</span><span class="tag">GitHub Pages</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 4">
+          <h3>Built for a phone on mobile data</h3>
+          <p>
+            System fonts, one hero photo per site, and gallery thumbnails
+            generated at build time: all 56 thumbnails together weigh about one
+            megabyte.
+          </p>
+          <div class="tags">
+            <span class="tag">Performance</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 5">
+          <h3>Safe by construction</h3>
+          <p>
+            Every piece of business data is escaped on the way out, pages carry
+            a Content-Security-Policy, and the structured data for search
+            engines can never close its own script tag.
+          </p>
+          <div class="tags">
+            <span class="tag">Security</span><span class="tag">JSON-LD</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENSHOTS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">The result</p>
+        <h2 class="display">In the browser</h2>
+      </div>
+      <div class="shots">
+        <div class="reveal">
+          <Window
+            title="ayach.is-a.dev/site-kit — gallery"
+            src={galleryFr}
+            alt="The Site Kit gallery page in French: the heading '60 sites, deux langues, un seul moteur', a row of category filter buttons, and the first four business cards with photos and colour swatches"
+            caption="The gallery: 60 demos, filtered by trade. The strip under each photo is that site's real palette, read from its theme file at build time."
+          />
+        </div>
+        <div class="shots-pair">
+          <div class="reveal" style="--index: 0">
+            <Window
+              title="The same gallery, in Arabic"
+              src={galleryAr}
+              alt="The same gallery page switched to Arabic: the whole layout is mirrored right to left, with Arabic category names and business names"
+              caption="One button flips the whole page to Arabic and right-to-left, in place."
+            />
+          </div>
+          <div class="reveal" style="--index: 1">
+            <Window
+              title="Law firm demo — Arabic"
+              src={demoLawAr}
+              alt="A law firm demo site in Arabic: navigation on the right, a large Arabic headline, and a photo of a lawyer signing a document on the left"
+              caption="A generated site in Arabic. Same renderer as the French version; only the direction and the text differ."
+            />
+          </div>
+        </div>
+        <div class="shots-pair">
+          <div class="reveal" style="--index: 0">
+            <Window
+              title="Riad demo — French"
+              src={demoRiad}
+              alt="A boutique riad demo site in French: dark green hero with a serif headline, two arched buttons, and a photo of a courtyard with a pool and lanterns"
+              caption="A different business, a different look. The arched buttons are one CSS variable."
+            />
+          </div>
+          <div class="reveal" style="--index: 1; max-width: 300px">
+            <Window
+              title="Yoga studio — phone"
+              src={phoneYoga}
+              alt="A yoga studio demo site at phone width: stacked navigation, headline, two buttons and a photo of a sunlit studio below"
+              caption="Every layout is designed at phone width first."
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Quality</p>
+        <h2 class="display">
+          What 497 tests protect, and what they can&rsquo;t
+        </h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          Most of the tests are generated from the list of businesses, which is
+          why there are so many and why a new site is covered the moment it is
+          added. For every site, in both languages, they check that <strong
+            >text meets the 4.5:1 contrast ratio</strong
+          > on the page, on buttons and over the hero photo; that no field is empty;
+          that every price is shown; and that hostile input comes out escaped.
+        </p>
+        <p>
+          What they cannot check is meaning. A full read of the Arabic, side by
+          side with the French, found a hospital page telling readers it was
+          &ldquo;perpendicular to insurers&rdquo; — one wrong letter, 497 green
+          tests. That review is written up in the <a
+            href="/log/site-kit-arabic-review/">Ship Log</a
+          >.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WAS BUILT ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">How it was built</p>
+        <h2 class="display">With AI coding agents, said plainly</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          The code, the copy and the test suite were written by AI coding agents
+          working under my direction. I did not type most of this, and I would
+          rather say so than let a case study imply otherwise.
+        </p>
+        <p>
+          My part was the direction: what to build and for whom, the rules it
+          had to follow (two languages, prices in dirhams, demos labelled as
+          demos), the calls when a trade-off came up, review of what came back,
+          and the go or no-go on every deploy. Working this way is a skill of
+          its own — a vague brief produces sixty vague websites — and it is the
+          part of this project I can speak to in detail.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIMITS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Honest limits</p>
+        <h2 class="display">What this is not</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          The 60 sites are concept demos, not client work. The businesses, phone
+          numbers and testimonials are invented, and the photos are
+          AI-generated. The Arabic has had a full review, but not by a native
+          Moroccan proofreader, which a real client&rsquo;s site would need
+          before launch.
+        </p>
+      </div>
+      <div class="featured-actions reveal" style="margin-top: var(--space-12)">
+        <a
+          href="https://ayach.is-a.dev/site-kit/"
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener">Browse the 60 demos</a
+        >
+        <a
+          href="https://github.com/YoussefAyach01/site-kit"
+          class="btn"
+          target="_blank"
+          rel="noopener">Source on GitHub</a
+        >
+      </div>
+    </div>
+  </section>
+</Base>

@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import ShipLog from "../components/ShipLog.astro";
 import Window from "../components/Window.astro";
 import aiCreate from "../assets/img/onebotads-ai-create.webp";
+import siteKitGallery from "../assets/img/site-kit-gallery-fr.webp";
 
 const shiplog = [
   {
@@ -140,6 +141,62 @@ const shiplog = [
             alt="OneBotAds dashboard: the AI assistant chat on the left filling in a complete ad campaign form on the right, including budgets for Meta and LinkedIn and a live audience estimate"
             caption="The flagship feature: describe a campaign in chat, the agent fills and launches the real form."
             eager
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SITE KIT ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Also shipped — side project, built with AI agents</p>
+        <h2 class="display">Site Kit</h2>
+      </div>
+
+      <div class="featured">
+        <div class="featured-copy reveal">
+          <h3>Sixty business websites, two languages, one engine.</h3>
+          <p>
+            A small TypeScript engine that builds a complete site for a local
+            business, in French and in Arabic, from one content file. Adding a
+            business means adding data, not code. I directed the build and
+            reviewed it; AI coding agents wrote most of it, and the case study
+            says so.
+          </p>
+          <div class="statgrid">
+            <div class="stat">
+              <strong>60</strong>
+              <span>live demo sites</span>
+            </div>
+            <div class="stat">
+              <strong>2</strong>
+              <span>languages, one RTL</span>
+            </div>
+            <div class="stat"><strong>497</strong> <span>tests</span></div>
+            <div class="stat">
+              <strong>0</strong>
+              <span>runtime dependencies</span>
+            </div>
+          </div>
+          <div class="featured-actions">
+            <a href="/projects/site-kit/" class="btn btn-primary">Case study</a>
+            <a
+              href="https://ayach.is-a.dev/site-kit/"
+              class="btn"
+              target="_blank"
+              rel="noopener">Live demos</a
+            >
+          </div>
+        </div>
+
+        <div class="reveal">
+          <Window
+            title="ayach.is-a.dev/site-kit — gallery"
+            src={siteKitGallery}
+            alt="The Site Kit gallery page: the heading '60 sites, deux langues, un seul moteur', category filter buttons, and business cards with photos"
+            caption="Sixty demos, filtered by trade, each in French and Arabic."
           />
         </div>
       </div>

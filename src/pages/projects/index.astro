@@ -2,19 +2,20 @@
 import Base from "../../layouts/Base.astro";
 import campaigns from "../../assets/img/onebotads-campaigns.webp";
 import Window from "../../components/Window.astro";
+import siteKitGallery from "../../assets/img/site-kit-gallery-fr.webp";
 ---
 
 <Base
   title="Projects — Ayach Youssef"
-  description="Shipped work: OneBotAds and other projects by Ayach Youssef, a software engineer focused on backend & DevOps."
+  description="Shipped work by Ayach Youssef, a software engineer focused on backend & DevOps: the OneBotAds and Site Kit case studies, a ten-project sprint, and smaller products with their source."
 >
   <section class="study-head container">
     <p class="eyebrow">Projects</p>
     <h1 class="display">Things I&rsquo;ve shipped</h1>
     <p class="lede">
-      Each project gets a full case study: what it is, what I built, how
-      it&rsquo;s architected, and where it runs. New entries land here as they
-      ship.
+      The two largest projects get a full case study: what it is, how it&rsquo;s
+      built, and where it runs. Smaller builds are listed below with their
+      source.
     </p>
   </section>
 
@@ -52,6 +53,42 @@ import Window from "../../components/Window.astro";
             title="onebotads.net — Campaign Manager"
             src={campaigns}
             alt="OneBotAds Campaign Manager listing campaigns across Meta, Taboola and TikTok in one table"
+          />
+        </div>
+      </div>
+
+      <div class="featured" style="margin-top: var(--space-16)">
+        <div class="featured-copy reveal">
+          <p class="eyebrow">2026 — side project — built with AI agents</p>
+          <h3>Site Kit</h3>
+          <p>
+            One small TypeScript engine that builds a complete website for a
+            local business, in French and Arabic, from a single content file.
+            Sixty demo sites are live, covered by 497 tests.
+          </p>
+          <div class="featured-tags">
+            <span class="tag tag-blue">TypeScript</span>
+            <span class="tag tag-green">Static HTML &amp; CSS</span>
+            <span class="tag tag-yellow">French + Arabic (RTL)</span>
+            <span class="tag tag-red">Vitest</span>
+          </div>
+          <div class="featured-actions">
+            <a href="/projects/site-kit/" class="btn btn-primary"
+              >Read the case study</a
+            >
+            <a
+              href="https://ayach.is-a.dev/site-kit/"
+              class="btn"
+              target="_blank"
+              rel="noopener">Live demos</a
+            >
+          </div>
+        </div>
+        <div class="reveal">
+          <Window
+            title="ayach.is-a.dev/site-kit — gallery"
+            src={siteKitGallery}
+            alt="The Site Kit gallery page: the heading '60 sites, deux langues, un seul moteur', category filter buttons, and business cards with photos"
           />
         </div>
       </div>
@@ -195,6 +232,342 @@ import Window from "../../components/Window.astro";
         >. A few (the ones needing a VPS or cloud account to actually run live)
         are code-complete and fully tested but not yet deployed to a public URL
         — each project's own README says exactly what's left.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Oct — Nov 2026 — built with AI coding agents</p>
+        <h2 class="display">Small products, built a different way</h2>
+        <p class="lede">
+          Everything in this section was built with AI coding agents. My part:
+          choosing what to build, setting the requirements, reviewing the
+          output, and deciding what ships. I list them for what they are, not as
+          code I typed by hand.
+        </p>
+      </div>
+      <div class="bento">
+        <article class="card reveal" style="--index: 0">
+          <h3>Invoice MA</h3>
+          <p>
+            Invoice generator for Moroccan auto-entrepreneurs and small
+            businesses: French interface, amounts in dirhams, the mentions a
+            Moroccan invoice is expected to carry, and PDF export through the
+            browser.
+          </p>
+          <p>
+            <a
+              href="https://invoice-ma.vercel.app"
+              target="_blank"
+              rel="noopener">Live site</a
+            > &middot; <a
+              href="https://github.com/YoussefAyach01/invoice-ma"
+              target="_blank"
+              rel="noopener">Source</a>
+          </p>
+          <div class="tags">
+            <span class="tag">Next.js</span><span class="tag">React</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 1">
+          <h3>Proposal Maker</h3>
+          <p>
+            A tool for freelancers to write client proposals and quotes, preview
+            them live, and export to PDF. No account: everything stays in the
+            browser.
+          </p>
+          <p>
+            <a
+              href="https://proposal-maker-phi.vercel.app"
+              target="_blank"
+              rel="noopener">Live site</a
+            > &middot; <a
+              href="https://github.com/YoussefAyach01/proposal-maker"
+              target="_blank"
+              rel="noopener">Source</a>
+          </p>
+          <div class="tags">
+            <span class="tag">Next.js</span><span class="tag"
+              >localStorage</span>
+          </div>
+        </article>
+        <article class="card reveal" style="--index: 2">
+          <h3>CeoJoe</h3>
+          <p>
+            The site for CeoJoe, my small web studio: services, pricing, and a
+            showcase of the Site Kit demos, presented as concept builds and not
+            as client work.
+          </p>
+          <p>
+            <a href="https://ceojoe.vercel.app" target="_blank" rel="noopener"
+              >Live site</a>
+          </p>
+          <div class="tags">
+            <span class="tag">Astro</span><span class="tag">Vercel</span>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="reveal" style="margin-top: var(--space-16)">
+        Code-complete, not deployed
+      </h3>
+      <p class="eyebrow reveal" style="margin-top: var(--space-12)">
+        Apps for local businesses
+      </p>
+      <div class="rows reveal" style="margin-top: var(--space-4)">
+        <div class="row">
+          <span class="row-key">Next.js</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/qr-menu"
+                target="_blank"
+                rel="noopener">qr-menu</a>
+            </h3>
+            <p>
+              QR-code menu for restaurants and caf&eacute;s. Diners order from
+              their phone and the order goes to the restaurant&rsquo;s WhatsApp.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Next.js</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/booking-page"
+                target="_blank"
+                rel="noopener">booking-page</a>
+            </h3>
+            <p>
+              Appointment booking for a salon: pick a service, a day and a free
+              slot, then confirm by WhatsApp.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Next.js</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/whatsapp-catalog"
+                target="_blank"
+                rel="noopener">whatsapp-catalog</a>
+            </h3>
+            <p>
+              Product catalogue for small shops, with orders sent to the
+              shop&rsquo;s WhatsApp.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Next.js</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/link-in-bio"
+                target="_blank"
+                rel="noopener">link-in-bio</a>
+            </h3>
+            <p>One public page of links per creator.</p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+      </div>
+      <p class="eyebrow reveal" style="margin-top: var(--space-12)">
+        Small SaaS building blocks
+      </p>
+      <div class="rows reveal" style="margin-top: var(--space-4)">
+        <div class="row">
+          <span class="row-key">Next.js</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/waitlist-kit"
+                target="_blank"
+                rel="noopener">waitlist-kit</a>
+            </h3>
+            <p>
+              Embeddable waitlist with a referral queue: leave an e-mail, get a
+              rank and an invite link.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Next.js</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/form-backend"
+                target="_blank"
+                rel="noopener">form-backend</a>
+            </h3>
+            <p>
+              A form endpoint in the style of Formspree: point any HTML form at
+              it and it stores the submissions.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Next.js</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/feedback-widget"
+                target="_blank"
+                rel="noopener">feedback-widget</a>
+            </h3>
+            <p>Embeddable feedback button plus a public roadmap with votes.</p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Next.js</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/changelog-saas"
+                target="_blank"
+                rel="noopener">changelog-saas</a>
+            </h3>
+            <p>
+              Hosted changelog with an embeddable &ldquo;What&rsquo;s new&rdquo;
+              widget.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+      </div>
+      <p class="eyebrow reveal" style="margin-top: var(--space-12)">
+        Developer APIs
+      </p>
+      <div class="rows reveal" style="margin-top: var(--space-4)">
+        <div class="row">
+          <span class="row-key">Hono</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/og-image-api"
+                target="_blank"
+                rel="noopener">og-image-api</a>
+            </h3>
+            <p>
+              Social preview images on demand: one GET request returns a
+              1200&times;630 PNG.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Hono</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/webhook-inbox"
+                target="_blank"
+                rel="noopener">webhook-inbox</a>
+            </h3>
+            <p>
+              Get a unique URL, point any webhook at it, and inspect what
+              arrives.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Hono</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/mock-api"
+                target="_blank"
+                rel="noopener">mock-api</a>
+            </h3>
+            <p>
+              Describe a resource as a JSON Schema and get a working CRUD
+              endpoint.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Hono</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/sheet-api"
+                target="_blank"
+                rel="noopener">sheet-api</a>
+            </h3>
+            <p>Upload a CSV and get a read-only JSON API over its rows.</p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Hono</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/status-page"
+                target="_blank"
+                rel="noopener">status-page</a>
+            </h3>
+            <p>
+              Uptime monitoring with a public status page. Opens an incident
+              after two failed checks in a row.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+      </div>
+      <p class="eyebrow reveal" style="margin-top: var(--space-12)">
+        Libraries and kits
+      </p>
+      <div class="rows reveal" style="margin-top: var(--space-4)">
+        <div class="row">
+          <span class="row-key">Postgres</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/pg-jobq"
+                target="_blank"
+                rel="noopener">pg-jobq</a>
+            </h3>
+            <p>
+              A small Postgres-backed job queue for Node: SKIP LOCKED claiming,
+              leases, retries with backoff.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">Documents</span>
+          <div>
+            <h3>
+              <a
+                href="https://github.com/YoussefAyach01/agency-kit"
+                target="_blank"
+                rel="noopener">agency-kit</a>
+            </h3>
+            <p>
+              A sales toolkit for selling Site Kit websites to local businesses.
+              Documents and templates, not software.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+      </div>
+      <p class="arch-note reveal" style="margin-top: var(--space-12)">
+        None of these fifteen has a public URL yet. Most keep their data in
+        SQLite and need a host with a persistent disk; each README says what is
+        left.
       </p>
     </div>
   </section>
