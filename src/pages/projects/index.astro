@@ -1,592 +1,174 @@
 ---
 import Base from "../../layouts/Base.astro";
-import campaigns from "../../assets/img/onebotads-campaigns.webp";
-import Window from "../../components/Window.astro";
-import siteKitGallery from "../../assets/img/site-kit-gallery-fr.webp";
+import ProjectCard from "../../components/ProjectCard.astro";
+import ProjectRow from "../../components/ProjectRow.astro";
+import {
+  GROUPS,
+  byGroup,
+  caseStudies,
+  counts,
+  type Project,
+} from "../../data/projects";
+
+const n = counts();
+const studies = caseStudies();
+
+/** Inside a group: case studies are in the strip above, so leave them out;
+ *  the strongest four become cards, the rest compact rows. */
+const rank = (p: Project) =>
+  (p.status === "live" || p.status === "released" ? 0 : 2) +
+  (p.built === "me" ? 0 : 1);
+const split = (list: Project[]) => {
+  const rest = list
+    .filter((p) => !p.caseStudy)
+    .sort((a, b) => rank(a) - rank(b) || b.date.localeCompare(a.date));
+  return { cards: rest.slice(0, 4), rows: rest.slice(4) };
+};
 ---
 
 <Base
   title="Projects — Ayach Youssef"
-  description="Shipped work by Ayach Youssef, a software engineer focused on backend & DevOps: the OneBotAds and Site Kit case studies, a ten-project sprint, and smaller products with their source."
+  description={`${n.total} projects by Ayach Youssef, a software engineer focused on backend & DevOps: five case studies, then infrastructure, backend services, products and tooling, each with its status and source.`}
 >
   <section class="study-head container">
     <p class="eyebrow">Projects</p>
     <h1 class="display">Things I&rsquo;ve shipped</h1>
     <p class="lede">
-      The two largest projects get a full case study: what it is, how it&rsquo;s
-      built, and where it runs. Smaller builds are listed below with their
-      source.
+      {n.total} projects since mid-2026: {n.live} with a public URL, {
+        n.released
+      }
+      released as installable tools, the rest code-complete on GitHub. Five get a
+      full case study. Every entry says what it is, what it runs on, and whether it
+      is actually live.
     </p>
   </section>
 
+  <section class="section" id="case-studies">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Case studies</p>
+        <h2 class="display">The five worth reading in full</h2>
+        <p class="lede">
+          What it is, how it is built, what went wrong, and what is still open.
+        </p>
+      </div>
+      <div class="bento">
+        {studies.map((p, i) => <ProjectCard project={p} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  {
+    GROUPS.map((g) => {
+      const { cards, rows } = split(byGroup(g.id));
+      return (
+        <section class="section" id={g.id}>
+          <div class="container">
+            <div class="section-head reveal">
+              <p class="eyebrow">{g.eyebrow}</p>
+              <h2 class="display">{g.title}</h2>
+              <p class="lede">{g.lede}</p>
+            </div>
+            {cards.length > 0 && (
+              <div class="bento">
+                {cards.map((p, i) => (
+                  <ProjectCard project={p} index={i} />
+                ))}
+              </div>
+            )}
+            {rows.length > 0 && (
+              <div class="rows reveal" style="margin-top: var(--space-8)">
+                {rows.map((p) => (
+                  <ProjectRow project={p} />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    })
+  }
+
   <section class="section">
     <div class="container">
-      <div class="featured">
-        <div class="featured-copy reveal">
-          <p class="eyebrow">2026 — Jobistart — production SaaS</p>
-          <h3>OneBotAds</h3>
-          <p>
-            AI-powered ad automation across Meta, TikTok, Google, Snapchat,
-            LinkedIn and Taboola — built from a click-through mockup to a live
-            product in a three-month sprint.
-          </p>
-          <div class="featured-tags">
-            <span class="tag tag-blue">React</span>
-            <span class="tag tag-green">Node.js / Express</span>
-            <span class="tag tag-yellow">PostgreSQL</span>
-            <span class="tag tag-red">LLM agent</span>
-          </div>
-          <div class="featured-actions">
-            <a href="/projects/onebotads/" class="btn btn-primary"
-              >Read the case study</a
-            >
-            <a
-              href="https://onebotads.net"
-              class="btn"
-              target="_blank"
-              rel="noopener">Live site</a
-            >
-          </div>
-        </div>
-        <div class="reveal">
-          <Window
-            title="onebotads.net — Campaign Manager"
-            src={campaigns}
-            alt="OneBotAds Campaign Manager listing campaigns across Meta, Taboola and TikTok in one table"
-          />
-        </div>
-      </div>
-
-      <div class="featured" style="margin-top: var(--space-16)">
-        <div class="featured-copy reveal">
-          <p class="eyebrow">2026 — side project — built with AI agents</p>
-          <h3>Site Kit</h3>
-          <p>
-            One small TypeScript engine that builds a complete website for a
-            local business, in French and Arabic, from a single content file.
-            Sixty demo sites are live, covered by 497 tests.
-          </p>
-          <div class="featured-tags">
-            <span class="tag tag-blue">TypeScript</span>
-            <span class="tag tag-green">Static HTML &amp; CSS</span>
-            <span class="tag tag-yellow">French + Arabic (RTL)</span>
-            <span class="tag tag-red">Vitest</span>
-          </div>
-          <div class="featured-actions">
-            <a href="/projects/site-kit/" class="btn btn-primary"
-              >Read the case study</a
-            >
-            <a
-              href="https://ayach.is-a.dev/site-kit/"
-              class="btn"
-              target="_blank"
-              rel="noopener">Live demos</a
-            >
-          </div>
-        </div>
-        <div class="reveal">
-          <Window
-            title="ayach.is-a.dev/site-kit — gallery"
-            src={siteKitGallery}
-            alt="The Site Kit gallery page: the heading '60 sites, deux langues, un seul moteur', category filter buttons, and business cards with photos"
-          />
-        </div>
-      </div>
-
-      <p class="arch-note reveal" style="margin-top: var(--space-16)">
-        Earlier, smaller work — a CPU simulator, Linux server labs, Oracle
-        database systems, network simulations — lives on the <a href="/#work"
-          >home page</a
-        >.
+      <p class="arch-note reveal">
+        <strong>How to read the badges.</strong>
+        <span class="tag tag-green">live</span> has a public URL you can open.
+        <span class="tag tag-blue">released</span> is an installable package or binary
+        with no hosted URL. <span class="tag">source</span> is code-complete and tested
+        on GitHub but not deployed, usually because it needs a server with a persistent
+        disk or a cloud account; each README says exactly what is left. <span
+          class="tag tag-yellow">private build</span
+        > has no public repo yet; I can walk through it on a call.
       </p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="earlier">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Sep 2026 — 10-project sprint</p>
-        <h2 class="display">Backend &amp; DevOps, in ten small builds</h2>
-        <p class="lede">
-          Each one scoped small on purpose, built to the same bar: README,{" "}
-          <code>.env.example</code>, real tests, clean git history. Picked to
-          cover ground OneBotAds doesn't — new languages, IaC, observability,
-          hardened auth.
-        </p>
+        <p class="eyebrow">Foundation — university, 2023 to 2026</p>
+        <h2 class="display">Earlier work</h2>
       </div>
-      <div class="bento">
-        <article class="card reveal" style="--index: 0">
-          <h3>deploy-pipeline</h3>
-          <p>
-            Dockerized app + GitHub Actions CI/CD + Ansible playbook for
-            provisioning a VPS from scratch — nginx, TLS, the works.
-          </p>
-          <div class="tags">
-            <span class="tag">Docker</span><span class="tag">Ansible</span><span
-              class="tag">GitHub Actions</span
-            >
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 1">
-          <h3>task-api-hardened</h3>
-          <p>
-            Fastify task API with Redis-backed rate limiting and caching,
-            structured logging, cache invalidation on writes.
-          </p>
-          <div class="tags">
-            <span class="tag">Fastify</span><span class="tag">Redis</span><span
-              class="tag">PostgreSQL</span
-            >
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 2">
-          <h3>observability-stack</h3>
-          <p>
-            Prometheus + Grafana, provisioned as code, scraping
-            task-api-hardened's <code>/metrics</code> for live dashboards.
-          </p>
-          <div class="tags">
-            <span class="tag">Prometheus</span><span class="tag">Grafana</span>
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 3">
-          <h3>ci-status</h3>
-          <p>
-            A Go CLI — my first Go project — that prints the latest GitHub
-            Actions run across several repos and can poll until it finishes.
-          </p>
-          <div class="tags">
-            <span class="tag">Go</span><span class="tag">GitHub API</span>
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 4">
-          <h3>do-vm-terraform</h3>
-          <p>
-            A Terraform module provisioning a DigitalOcean droplet, firewall and
-            DNS record — the declarative counterpart to deploy-pipeline's
-            Ansible. Tested against a mocked provider in CI.
-          </p>
-          <div class="tags">
-            <span class="tag">Terraform</span><span class="tag"
-              >DigitalOcean</span
-            >
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 5">
-          <h3>live-room</h3>
-          <p>
-            A real-time poll room — votes and presence sync instantly across
-            every connected client over WebSockets.
-          </p>
-          <div class="tags">
-            <span class="tag">Socket.io</span><span class="tag">Express</span>
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 6">
-          <h3>auth-service</h3>
-          <p>
-            JWT auth with refresh-token rotation and reuse detection, argon2id
-            hashing, rate-limited login — each decision checked against the
-            OWASP auth cheat sheet as I built it.
-          </p>
-          <div class="tags">
-            <span class="tag">JWT</span><span class="tag">argon2id</span><span
-              class="tag">OWASP</span
-            >
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 7">
-          <h3>strict-env</h3>
-          <p>
-            A zero-dependency typed env-var validator, published as a dual
-            ESM/CJS package — my first open-source npm package.
-          </p>
-          <div class="tags">
-            <span class="tag">TypeScript</span><span class="tag">npm</span>
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 8">
-          <h3>weather-pulse</h3>
-          <p>
-            A cron job collecting real weather data into Postgres, served
-            through a zero-JS, server-rendered dashboard.
-          </p>
-          <div class="tags">
-            <span class="tag">node-cron</span><span class="tag">PostgreSQL</span
-            >
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 9">
-          <h3>termdle</h3>
-          <p>A terminal Wordle clone — the deliberately just-for-fun slot.</p>
-          <div class="tags">
-            <span class="tag">TypeScript</span><span class="tag">CLI</span>
-          </div>
-        </article>
-      </div>
-      <p class="arch-note reveal" style="margin-top: var(--space-16)">
-        Source for all ten is on <a
-          href="https://github.com/YoussefAyach01"
-          target="_blank"
-          rel="noopener">GitHub</a
-        >. A few (the ones needing a VPS or cloud account to actually run live)
-        are code-complete and fully tested but not yet deployed to a public URL
-        — each project's own README says exactly what's left.
-      </p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Oct — Nov 2026 — built with AI coding agents</p>
-        <h2 class="display">Small products, built a different way</h2>
-        <p class="lede">
-          Everything in this section was built with AI coding agents. My part:
-          choosing what to build, setting the requirements, reviewing the
-          output, and deciding what ships. I list them for what they are, not as
-          code I typed by hand.
-        </p>
-      </div>
-      <div class="bento">
-        <article class="card reveal" style="--index: 0">
-          <h3>Invoice MA</h3>
-          <p>
-            Invoice generator for Moroccan auto-entrepreneurs and small
-            businesses: French interface, amounts in dirhams, the mentions a
-            Moroccan invoice is expected to carry, and PDF export through the
-            browser.
-          </p>
-          <p>
-            <a
-              href="https://invoice-ma.vercel.app"
-              target="_blank"
-              rel="noopener">Live site</a
-            > &middot; <a
-              href="https://github.com/YoussefAyach01/invoice-ma"
-              target="_blank"
-              rel="noopener">Source</a
-            >
-          </p>
-          <div class="tags">
-            <span class="tag">Next.js</span><span class="tag">React</span>
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 1">
-          <h3>Proposal Maker</h3>
-          <p>
-            A tool for freelancers to write client proposals and quotes, preview
-            them live, and export to PDF. No account: everything stays in the
-            browser.
-          </p>
-          <p>
-            <a
-              href="https://proposal-maker-phi.vercel.app"
-              target="_blank"
-              rel="noopener">Live site</a
-            > &middot; <a
-              href="https://github.com/YoussefAyach01/proposal-maker"
-              target="_blank"
-              rel="noopener">Source</a
-            >
-          </p>
-          <div class="tags">
-            <span class="tag">Next.js</span><span class="tag">localStorage</span
-            >
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 2">
-          <h3>CeoJoe</h3>
-          <p>
-            The site for CeoJoe, my small web studio: services, pricing, and a
-            showcase of the Site Kit demos, presented as concept builds and not
-            as client work.
-          </p>
-          <p>
-            <a href="https://ceojoe.vercel.app" target="_blank" rel="noopener"
-              >Live site</a
-            >
-          </p>
-          <div class="tags">
-            <span class="tag">Astro</span><span class="tag">Vercel</span>
-          </div>
-        </article>
-      </div>
-
-      <h3 class="reveal" style="margin-top: var(--space-16)">
-        Code-complete, not deployed
-      </h3>
-      <p class="eyebrow reveal" style="margin-top: var(--space-12)">
-        Apps for local businesses
-      </p>
-      <div class="rows reveal" style="margin-top: var(--space-4)">
+      <div class="rows reveal">
         <div class="row">
-          <span class="row-key">Next.js</span>
+          <span class="row-key">Linux</span>
           <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/qr-menu"
-                target="_blank"
-                rel="noopener">qr-menu</a
-              >
-            </h3>
+            <h3>Linux server administration lab</h3>
             <p>
-              QR-code menu for restaurants and caf&eacute;s. Diners order from
-              their phone and the order goes to the restaurant&rsquo;s WhatsApp.
+              Ubuntu VMs administered entirely from the shell: users and
+              permissions, services, cron jobs, and real-time monitoring via
+              Bash scripting.
             </p>
           </div>
-          <span class="row-note"></span>
+          <span class="row-note">Bash</span>
         </div>
         <div class="row">
-          <span class="row-key">Next.js</span>
+          <span class="row-key">Cisco PT</span>
           <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/booking-page"
-                target="_blank"
-                rel="noopener">booking-page</a
-              >
-            </h3>
+            <h3>Enterprise network simulation</h3>
             <p>
-              Appointment booking for a salon: pick a service, a day and a free
-              slot, then confirm by WhatsApp.
+              Multi-VLAN networks with inter-VLAN routing, DNS, DHCP and WAN
+              links, designed and simulated in Cisco Packet Tracer.
             </p>
           </div>
-          <span class="row-note"></span>
+          <span class="row-note">VLAN, DNS/DHCP</span>
         </div>
         <div class="row">
-          <span class="row-key">Next.js</span>
+          <span class="row-key">Python</span>
           <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/whatsapp-catalog"
-                target="_blank"
-                rel="noopener">whatsapp-catalog</a
-              >
-            </h3>
+            <h3>Motorola 6809 processor simulator</h3>
             <p>
-              Product catalogue for small shops, with orders sent to the
-              shop&rsquo;s WhatsApp.
+              Reproduced the full 6809 CPU in software: instruction fetch,
+              decode and execution cycle implemented from scratch.
             </p>
           </div>
-          <span class="row-note"></span>
+          <span class="row-note">CPU architecture</span>
         </div>
         <div class="row">
-          <span class="row-key">Next.js</span>
+          <span class="row-key">PL/SQL</span>
           <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/link-in-bio"
-                target="_blank"
-                rel="noopener">link-in-bio</a
-              >
-            </h3>
-            <p>One public page of links per creator.</p>
+            <h3>Advanced database management</h3>
+            <p>
+              Relational schemas with stored procedures, triggers, cursors and
+              query optimisation, Oracle running in Docker for reproducible
+              environments.
+            </p>
           </div>
-          <span class="row-note"></span>
+          <span class="row-note">Oracle, Docker</span>
+        </div>
+        <div class="row">
+          <span class="row-key">React</span>
+          <div>
+            <h3>Full-stack web applications</h3>
+            <p>
+              Dynamic web apps with REST APIs, session management and responsive
+              UI: PHP and Node back-ends integrated with React front-ends.
+            </p>
+          </div>
+          <span class="row-note">Node.js, MySQL</span>
         </div>
       </div>
-      <p class="eyebrow reveal" style="margin-top: var(--space-12)">
-        Small SaaS building blocks
-      </p>
-      <div class="rows reveal" style="margin-top: var(--space-4)">
-        <div class="row">
-          <span class="row-key">Next.js</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/waitlist-kit"
-                target="_blank"
-                rel="noopener">waitlist-kit</a
-              >
-            </h3>
-            <p>
-              Embeddable waitlist with a referral queue: leave an e-mail, get a
-              rank and an invite link.
-            </p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-        <div class="row">
-          <span class="row-key">Next.js</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/form-backend"
-                target="_blank"
-                rel="noopener">form-backend</a
-              >
-            </h3>
-            <p>
-              A form endpoint in the style of Formspree: point any HTML form at
-              it and it stores the submissions.
-            </p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-        <div class="row">
-          <span class="row-key">Next.js</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/feedback-widget"
-                target="_blank"
-                rel="noopener">feedback-widget</a
-              >
-            </h3>
-            <p>Embeddable feedback button plus a public roadmap with votes.</p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-        <div class="row">
-          <span class="row-key">Next.js</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/changelog-saas"
-                target="_blank"
-                rel="noopener">changelog-saas</a
-              >
-            </h3>
-            <p>
-              Hosted changelog with an embeddable &ldquo;What&rsquo;s new&rdquo;
-              widget.
-            </p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-      </div>
-      <p class="eyebrow reveal" style="margin-top: var(--space-12)">
-        Developer APIs
-      </p>
-      <div class="rows reveal" style="margin-top: var(--space-4)">
-        <div class="row">
-          <span class="row-key">Hono</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/og-image-api"
-                target="_blank"
-                rel="noopener">og-image-api</a
-              >
-            </h3>
-            <p>
-              Social preview images on demand: one GET request returns a
-              1200&times;630 PNG.
-            </p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-        <div class="row">
-          <span class="row-key">Hono</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/webhook-inbox"
-                target="_blank"
-                rel="noopener">webhook-inbox</a
-              >
-            </h3>
-            <p>
-              Get a unique URL, point any webhook at it, and inspect what
-              arrives.
-            </p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-        <div class="row">
-          <span class="row-key">Hono</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/mock-api"
-                target="_blank"
-                rel="noopener">mock-api</a
-              >
-            </h3>
-            <p>
-              Describe a resource as a JSON Schema and get a working CRUD
-              endpoint.
-            </p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-        <div class="row">
-          <span class="row-key">Hono</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/sheet-api"
-                target="_blank"
-                rel="noopener">sheet-api</a
-              >
-            </h3>
-            <p>Upload a CSV and get a read-only JSON API over its rows.</p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-        <div class="row">
-          <span class="row-key">Hono</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/status-page"
-                target="_blank"
-                rel="noopener">status-page</a
-              >
-            </h3>
-            <p>
-              Uptime monitoring with a public status page. Opens an incident
-              after two failed checks in a row.
-            </p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-      </div>
-      <p class="eyebrow reveal" style="margin-top: var(--space-12)">
-        Libraries and kits
-      </p>
-      <div class="rows reveal" style="margin-top: var(--space-4)">
-        <div class="row">
-          <span class="row-key">Postgres</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/pg-jobq"
-                target="_blank"
-                rel="noopener">pg-jobq</a
-              >
-            </h3>
-            <p>
-              A small Postgres-backed job queue for Node: SKIP LOCKED claiming,
-              leases, retries with backoff.
-            </p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-        <div class="row">
-          <span class="row-key">Documents</span>
-          <div>
-            <h3>
-              <a
-                href="https://github.com/YoussefAyach01/agency-kit"
-                target="_blank"
-                rel="noopener">agency-kit</a
-              >
-            </h3>
-            <p>
-              A sales toolkit for selling Site Kit websites to local businesses.
-              Documents and templates, not software.
-            </p>
-          </div>
-          <span class="row-note"></span>
-        </div>
-      </div>
-      <p class="arch-note reveal" style="margin-top: var(--space-12)">
-        None of these fifteen has a public URL yet. Most keep their data in
-        SQLite and need a host with a persistent disk; each README says what is
-        left.
-      </p>
     </div>
   </section>
 </Base>
