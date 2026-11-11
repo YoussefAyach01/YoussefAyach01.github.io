@@ -2,56 +2,13 @@
 import Base from "../layouts/Base.astro";
 import ShipLog from "../components/ShipLog.astro";
 import Window from "../components/Window.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 import aiCreate from "../assets/img/onebotads-ai-create.webp";
-import siteKitGallery from "../assets/img/site-kit-gallery-fr.webp";
+import { TIMELINE } from "../data/timeline";
+import { SKILLS } from "../data/skills";
+import { featured, counts } from "../data/projects";
 
-const shiplog = [
-  {
-    date: "2023",
-    datetime: "2023-09",
-    text: "DEUST — Maths, CS & Physics, FST Settat",
-  },
-  {
-    date: "2025",
-    datetime: "2025-09",
-    text: "Licence ST — Computer Engineering",
-  },
-  {
-    date: "2026.04",
-    datetime: "2026-04",
-    text: "PFE internship at Jobistart — OneBotAds",
-  },
-  {
-    date: "2026.06",
-    datetime: "2026-06-23",
-    text: "onebotads.net deployed to production",
-    href: "/projects/onebotads/",
-  },
-  {
-    date: "2026.06",
-    datetime: "2026-06-30",
-    text: "full handoff delivered: code, docs, DB",
-  },
-  {
-    date: "2026.09",
-    datetime: "2026-09-14",
-    text: "ten-project backend & DevOps sprint",
-    href: "/projects/",
-  },
-  {
-    date: "2026.10",
-    datetime: "2026-10-30",
-    text: "Invoice MA and Proposal Maker live",
-    href: "/projects/",
-  },
-  {
-    date: "2026.11",
-    datetime: "2026-11-10",
-    text: "Site Kit: 60 bilingual demo sites live",
-    href: "/projects/site-kit/",
-  },
-  { date: "now", text: "open to backend and DevOps roles, remote or on-site" },
-];
+const n = counts();
 ---
 
 <Base
@@ -79,7 +36,7 @@ const shiplog = [
           <a href="#contact" class="btn">Get in touch</a>
         </div>
       </div>
-      <ShipLog entries={shiplog} />
+      <ShipLog entries={TIMELINE} />
     </div>
   </section>
 
@@ -147,130 +104,21 @@ const shiplog = [
     </div>
   </section>
 
-  <!-- ============ SITE KIT ============ -->
+  <!-- ============ ALSO BUILT ============ -->
   <section class="section">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Also shipped — side project, built with AI agents</p>
-        <h2 class="display">Site Kit</h2>
-      </div>
-
-      <div class="featured">
-        <div class="featured-copy reveal">
-          <h3>Sixty business websites, two languages, one engine.</h3>
-          <p>
-            A small TypeScript engine that builds a complete site for a local
-            business, in French and in Arabic, from one content file. Adding a
-            business means adding data, not code. I directed the build and
-            reviewed it; AI coding agents wrote most of it, and the case study
-            says so.
-          </p>
-          <div class="statgrid">
-            <div class="stat">
-              <strong>60</strong>
-              <span>live demo sites</span>
-            </div>
-            <div class="stat">
-              <strong>2</strong>
-              <span>languages, one RTL</span>
-            </div>
-            <div class="stat"><strong>497</strong> <span>tests</span></div>
-            <div class="stat">
-              <strong>0</strong>
-              <span>runtime dependencies</span>
-            </div>
-          </div>
-          <div class="featured-actions">
-            <a href="/projects/site-kit/" class="btn btn-primary">Case study</a>
-            <a
-              href="https://ayach.is-a.dev/site-kit/"
-              class="btn"
-              target="_blank"
-              rel="noopener">Live demos</a
-            >
-          </div>
-        </div>
-
-        <div class="reveal">
-          <Window
-            title="ayach.is-a.dev/site-kit — gallery"
-            src={siteKitGallery}
-            alt="The Site Kit gallery page: the heading '60 sites, deux langues, un seul moteur', category filter buttons, and business cards with photos"
-            caption="Sixty demos, filtered by trade, each in French and Arabic."
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ EARLIER WORK ============ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Foundation — systems work that went deep</p>
-        <h2 class="display">Earlier work</h2>
+        <p class="eyebrow">Since then — {n.total} projects, {n.live} live</p>
+        <h2 class="display">Also built</h2>
+        <p class="lede">
+          A multi-tenant SaaS with a real security pass, sixty bilingual
+          business sites from one engine, and a privacy-first analytics service
+          with its own AWS Terraform module. The full list, grouped and badged
+          by status, is on the <a href="/projects/">projects page</a>.
+        </p>
       </div>
       <div class="bento">
-        <article class="card reveal" style="--index: 0">
-          <h3>Linux server administration lab</h3>
-          <p>
-            Ubuntu VMs administered entirely from the shell: users and
-            permissions, services, cron jobs, and real-time monitoring via Bash
-            scripting.
-          </p>
-          <div class="tags">
-            <span class="tag">Linux</span><span class="tag">Bash</span>
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 1">
-          <h3>Enterprise network simulation</h3>
-          <p>
-            Multi-VLAN networks with inter-VLAN routing, DNS, DHCP and WAN
-            links, designed and simulated in Cisco Packet Tracer.
-          </p>
-          <div class="tags">
-            <span class="tag">Cisco PT</span><span class="tag">VLAN</span><span
-              class="tag">DNS/DHCP</span
-            >
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 2">
-          <h3>Motorola 6809 processor simulator</h3>
-          <p>
-            Reproduced the full 6809 CPU in software — instruction fetch, decode
-            and execution cycle implemented from scratch in Python.
-          </p>
-          <div class="tags">
-            <span class="tag">Python</span><span class="tag"
-              >CPU architecture</span
-            >
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 3">
-          <h3>Advanced database management</h3>
-          <p>
-            Relational schemas with stored procedures, triggers, cursors and
-            query optimisation — Oracle running in Docker for reproducible
-            environments.
-          </p>
-          <div class="tags">
-            <span class="tag">PL/SQL</span><span class="tag">Oracle</span><span
-              class="tag">Docker</span
-            >
-          </div>
-        </article>
-        <article class="card reveal" style="--index: 4">
-          <h3>Full-stack web applications</h3>
-          <p>
-            Dynamic web apps with REST APIs, session management and responsive
-            UI — PHP and Node back-ends integrated with React front-ends.
-          </p>
-          <div class="tags">
-            <span class="tag">React</span><span class="tag">Node.js</span><span
-              class="tag">MySQL</span
-            >
-          </div>
-        </article>
+        {featured().map((p, i) => <ProjectCard project={p} index={i} />)}
       </div>
     </div>
   </section>
@@ -283,58 +131,20 @@ const shiplog = [
         <h2 class="display">What I work with</h2>
       </div>
       <div class="skills">
-        <div class="skill-group reveal" style="--index: 0">
-          <h3>Infrastructure &amp; DevOps</h3>
-          <ul>
-            <li><span class="tag tag-yellow">Linux / Ubuntu</span></li>
-            <li><span class="tag tag-yellow">Docker</span></li>
-            <li><span class="tag tag-yellow">Ansible</span></li>
-            <li><span class="tag tag-yellow">Terraform</span></li>
-            <li><span class="tag tag-yellow">nginx</span></li>
-            <li><span class="tag tag-yellow">PM2</span></li>
-            <li><span class="tag tag-yellow">GitHub Actions (CI/CD)</span></li>
-            <li><span class="tag tag-yellow">Prometheus / Grafana</span></li>
-            <li><span class="tag tag-yellow">DNS / DHCP</span></li>
-            <li><span class="tag tag-yellow">VLAN / WAN</span></li>
-          </ul>
-        </div>
-        <div class="skill-group reveal" style="--index: 1">
-          <h3>Languages</h3>
-          <ul>
-            <li><span class="tag tag-blue">JavaScript / TypeScript</span></li>
-            <li><span class="tag tag-blue">Go</span></li>
-            <li><span class="tag tag-blue">Python</span></li>
-            <li><span class="tag tag-blue">Java</span></li>
-            <li><span class="tag tag-blue">C</span></li>
-            <li><span class="tag tag-blue">PHP</span></li>
-            <li><span class="tag tag-blue">SQL / PL-SQL</span></li>
-            <li><span class="tag tag-blue">Bash</span></li>
-          </ul>
-        </div>
-        <div class="skill-group reveal" style="--index: 2">
-          <h3>Web &amp; backend</h3>
-          <ul>
-            <li><span class="tag tag-green">React</span></li>
-            <li>
-              <span class="tag tag-green">Node.js / Express / Fastify</span>
-            </li>
-            <li><span class="tag tag-green">Socket.io / WebSockets</span></li>
-            <li><span class="tag tag-green">Sequelize</span></li>
-            <li><span class="tag tag-green">REST APIs</span></li>
-            <li><span class="tag tag-green">JWT / OAuth 2.0</span></li>
-            <li><span class="tag tag-green">Stripe</span></li>
-          </ul>
-        </div>
-        <div class="skill-group reveal" style="--index: 3">
-          <h3>Data &amp; tools</h3>
-          <ul>
-            <li><span class="tag tag-red">PostgreSQL</span></li>
-            <li><span class="tag tag-red">Redis</span></li>
-            <li><span class="tag tag-red">Oracle</span></li>
-            <li><span class="tag tag-red">Git</span></li>
-            <li><span class="tag tag-red">MCP servers</span></li>
-          </ul>
-        </div>
+        {
+          SKILLS.map((g, i) => (
+            <div class="skill-group reveal" style={`--index: ${i}`}>
+              <h3>{g.title}</h3>
+              <ul>
+                {g.items.map((s) => (
+                  <li>
+                    <span class={`tag tag-${g.tone}`}>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -430,6 +240,16 @@ const shiplog = [
           <span class="row-key">cv</span>
           <h3>Live CV — view or print to PDF</h3>
           <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a
+          class="row"
+          href="https://ceojoe.vercel.app"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="row-key">studio</span>
+          <h3>Client work goes through CeoJoe</h3>
+          <span class="arrow" aria-hidden="true">&nearr;</span>
         </a>
       </div>
     </div>

@@ -1,5 +1,27 @@
 ---
 import Base from "../layouts/Base.astro";
+import { forCv } from "../data/projects";
+import { skillsCompact } from "../data/skills";
+
+const MONTH = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+const fmt = (ym: string) => {
+  const [y, m] = ym.split("-");
+  return `${MONTH[Number(m) - 1]} ${y}`;
+};
+const cvProjects = forCv();
 ---
 
 <Base
@@ -110,6 +132,23 @@ import Base from "../layouts/Base.astro";
 
         <div class="cv-section">
           <h3 class="cv-h">Projects</h3>
+          {
+            cvProjects.map((p) => (
+              <div class="cv-item">
+                <div class="cv-item-head">
+                  <strong>{p.name}</strong>
+                  <span class="cv-date">{fmt(p.date)}</span>
+                </div>
+                <ul>
+                  <li>
+                    {p.tagline} {p.stack.join(", ")}.
+                    {p.built === "ai-agents" &&
+                      " Directed and reviewed by me; built with AI coding agents."}
+                  </li>
+                </ul>
+              </div>
+            ))
+          }
           <div class="cv-item">
             <div class="cv-item-head">
               <strong>Backend &amp; DevOps sprint — ten small builds</strong>
@@ -120,20 +159,6 @@ import Base from "../layouts/Base.astro";
                 CI/CD + Ansible deploy pipeline, Terraform module,
                 Prometheus/Grafana stack, hardened Fastify API with Redis, JWT
                 auth, a Go CLI.
-              </li>
-            </ul>
-          </div>
-          <div class="cv-item">
-            <div class="cv-item-head">
-              <strong
-                >Site Kit — 60 bilingual business sites from one engine</strong
-              >
-              <span class="cv-date">Sep — Nov 2026</span>
-            </div>
-            <ul>
-              <li>
-                TypeScript static-site engine, French + Arabic (RTL), 497 tests.
-                Directed and reviewed by me; built with AI coding agents.
               </li>
             </ul>
           </div>
@@ -169,15 +194,14 @@ import Base from "../layouts/Base.astro";
           <div>
             <h3 class="cv-h">Skills</h3>
             <p class="cv-skills">
-              <strong>Infrastructure &amp; DevOps:</strong> Linux, Docker, Ansible,
-              Terraform, nginx, PM2, GitHub Actions (CI/CD), Prometheus/Grafana, Git<br
-              />
-              <strong>Languages:</strong> JavaScript/TypeScript, Go, Python, Java,
-              C, PHP, SQL/PL-SQL, Bash<br />
-              <strong>Web:</strong> React, Node.js/Express/Fastify, Sequelize, REST,
-              WebSockets, OAuth 2.0, Stripe, Astro<br />
-              <strong>Data &amp; AI:</strong> PostgreSQL, Redis, Oracle, MySQL, MCP
-              servers, LLM agents
+              {
+                skillsCompact().map((g) => (
+                  <>
+                    <strong>{g.title}:</strong> {g.text}
+                    <br />
+                  </>
+                ))
+              }
             </p>
           </div>
           <div>
