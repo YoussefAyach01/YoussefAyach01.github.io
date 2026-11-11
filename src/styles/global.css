@@ -703,11 +703,23 @@ figcaption {
     grid-template-columns: 1fr;
     gap: var(--space-1);
   }
+  /* Five case studies and a blog now live behind this nav, so on a phone it
+     wraps to a second row instead of hiding everything but the CV button. */
+  .masthead-inner {
+    flex-wrap: wrap;
+    row-gap: var(--space-1);
+    padding-block: var(--space-3);
+  }
   .masthead nav {
-    gap: var(--space-4);
+    gap: var(--space-6);
+    width: 100%;
   }
   .masthead nav a:not(.btn) {
-    display: none;
+    padding-block: var(--space-3);
+  }
+  .masthead nav a.btn {
+    margin-left: auto;
+    padding: var(--space-2) var(--space-4);
   }
   .study-head {
     padding-block: var(--space-16) var(--space-8);

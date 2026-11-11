@@ -34,12 +34,10 @@ const split = (list: Project[]) => {
     <p class="eyebrow">Projects</p>
     <h1 class="display">Things I&rsquo;ve shipped</h1>
     <p class="lede">
-      {n.total} projects since mid-2026: {n.live} with a public URL, {
-        n.released
-      }
-      released as installable tools, the rest code-complete on GitHub. Five get a
-      full case study. Every entry says what it is, what it runs on, and whether it
-      is actually live.
+      {
+        `${n.total} projects since mid-2026: ${n.live} with a public URL, ${n.released} released as installable tools, `
+      }the rest code-complete on GitHub. Five get a full case study. Every entry
+      says what it is, what it runs on, and whether it is actually live.
     </p>
   </section>
 
