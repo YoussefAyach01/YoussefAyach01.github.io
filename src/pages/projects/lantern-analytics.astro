@@ -1,0 +1,228 @@
+---
+import Base from "../../layouts/Base.astro";
+import Window from "../../components/Window.astro";
+import dashboard from "../../assets/img/lantern-dashboard.webp";
+import phone from "../../assets/img/lantern-dashboard-phone.webp";
+---
+
+<Base
+  title="Lantern Analytics — case study — Ayach Youssef"
+  description="Lantern Analytics: cookieless web analytics where the schema itself has no column for an IP, a cookie or a fingerprint, plus an AWS Terraform module tested with a mocked provider. Built with AI coding agents under my direction."
+>
+  <!-- ============ TITLE ============ -->
+  <section class="study-head container">
+    <p class="eyebrow">Case study — side project, 2026</p>
+    <h1 class="display">Lantern Analytics</h1>
+    <p class="lede">
+      Web analytics that cannot track a person, because the database has nowhere
+      to put the information it would need. A tracking snippet under two
+      kilobytes, an ingest API, a server-rendered dashboard, and an AWS
+      Terraform module to host it on a single small instance.
+    </p>
+
+    <div class="meta-band">
+      <div class="meta-cell">
+        <span class="eyebrow">Role</span>
+        <p>Direction and review; built with AI coding agents</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Timeline</span>
+        <p>November 2026</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Stack</span>
+        <p>Hono &middot; SQLite &middot; Terraform (AWS) &middot; Docker</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Status</span>
+        <p>Working locally, 33 tests. Terraform validated, never applied.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PROBLEM ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">The problem</p>
+        <h2 class="display">
+          &ldquo;Privacy-friendly&rdquo; usually means &ldquo;we hash it&rdquo;
+        </h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          Most lightweight analytics tools still write something identifying to
+          disk so they can tell a returning visitor from a new one: a hashed
+          cookie, a stored IP, a long-lived fingerprint. The promise is that the
+          hash is not personal data. The honest version of that promise is
+          shorter: it depends.
+        </p>
+        <p>
+          The brief for this one was stricter. Count visits and pageviews, show
+          top pages and referrers, run on a small self-hosted box, and make the
+          privacy claim something a reader can check in the schema rather than
+          take on trust.
+        </p>
+      </div>
+      <div class="reveal" style="margin-top: var(--space-12)">
+        <Window
+          title="lantern-analytics — dashboard"
+          src={dashboard}
+          alt="The Lantern Analytics dashboard for a site called Atlas Coffee Roasters: two totals, 833 visits and 1360 pageviews, a bar chart of the last 14 days, and a top-pages table listing /, /menu, /blog/how-we-roast and others with visits and pageviews"
+          caption="Two weeks of seeded traffic for a fictional roaster. Totals, a daily chart, top pages, top referrers. No client-side framework, no cookies."
+          eager
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DESIGN ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">The design</p>
+        <h2 class="display">Four properties the code enforces</h2>
+      </div>
+      <div class="bento">
+        <article class="card reveal" style="--index: 0">
+          <h3>No column for it</h3>
+          <p>
+            The <code>events</code> table has a path, a referrer host, a device class,
+            a timestamp and one flag, <code>is_new_visit</code>. There is no IP
+            column, no cookie id, no hash. A privacy test serialises a real
+            inserted row and asserts the IP and the user agent never appear in
+            it.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 1">
+          <h3>Dedup that forgets at midnight</h3>
+          <p>
+            Telling a second pageview from a new visit uses an in-memory set of
+            SHA-256 hashes of a random daily salt, the site, the IP and the user
+            agent. At UTC midnight the salt is regenerated and the set is thrown
+            away. Tests prove the same visitor hashes differently across the
+            boundary and never rotates mid-day.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 2">
+          <h3>Rollups you can re-run</h3>
+          <p>
+            Daily stats are recomputed per site and day by deleting that
+            day&rsquo;s rows and re-deriving them from raw events in one
+            statement. Running the rollup once, twice or five times produces
+            identical totals, and a test does exactly that with a random count.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 3">
+          <h3>No oracle for guessing</h3>
+          <p>
+            The collect endpoint answers an unknown site token with the same
+            empty 204 it gives a valid one, so a token cannot be probed. Reads
+            always need the owning API key; one key&rsquo;s dashboard is not
+            reachable with another&rsquo;s, and a test tries.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INFRA ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Infrastructure</p>
+        <h2 class="display">AWS Terraform, tested without an AWS account</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          The hosting is one EC2 instance, an Elastic IP, a security group and
+          an optional Route 53 record, written as a reusable module with an
+          example and the same shape as my earlier DigitalOcean module.
+          <code>allowed_ssh_cidrs</code> has no default, so port 22 open to the world
+          cannot happen by omission; the AMI and subnet have no defaults either, because
+          a module should not guess your region.
+        </p>
+        <p>
+          It has never been applied, because no AWS account exists for this
+          project yet, and the README says so in the first paragraph. What has
+          run: <code>terraform fmt</code>, <code>validate</code> on the module and
+          the example, and <code>terraform test</code> against a mocked AWS provider,
+          which plans the instance, the IP and the security group, confirms the DNS
+          record only appears when a zone id and domain are supplied, and confirms
+          the SSH rule always carries the caller&rsquo;s CIDR and never <code
+            >0.0.0.0/0</code
+          >. CI runs all of it on every push with no credentials.
+        </p>
+      </div>
+      <div class="shots-pair reveal" style="margin-top: var(--space-12)">
+        <Window
+          title="dashboard at 375px"
+          src={phone}
+          alt="The same dashboard on a phone-width screen: totals stacked, the 14-day chart, top pages and referrers tables, and the embed snippet with the note 'No cookies, no IP storage, no persistent fingerprint'"
+          caption="Mobile-first by construction: the page is plain HTML and one stylesheet."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WAS BUILT ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">How it was built</p>
+        <h2 class="display">With AI coding agents, and one bug they shipped</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          The code and tests were written by AI coding agents under my
+          direction, in the same working pattern as <a
+            href="/projects/site-kit/">Site Kit</a
+          >: I set the brief and the rules, reviewed what came back, and decided
+          what counted as done. The brief was explicit that the privacy property
+          had to be enforced by schema and tests, not by a sentence in the
+          README, and that is the part of the output I checked hardest.
+        </p>
+        <p>
+          The first time I put real-looking traffic through it and opened the
+          dashboard, the 14-day chart was an empty box. Every number was right;
+          the bars were set with inline <code>style</code> attributes, and the page
+          ships a strict content-security policy that silently drops those. The agents
+          had written the policy and the chart separately and never loaded the page
+          in a browser. The fix is heights as classes, plus a test that the dashboard
+          HTML contains no
+          <code>style=</code> at all. <a href="/log/lantern-privacy-by-schema/"
+            >The Ship Log entry</a
+          > has the rest.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIMITS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Honest limits</p>
+        <h2 class="display">What this is not</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          It is a single SQLite file on a single instance, with in-memory rate
+          limiters that reset on restart: fine for a handful of sites, not a
+          multi-region design. There is no signup or billing; API keys are
+          minted by an admin call. Device detection is a user-agent regex. And
+          &ldquo;no cookies, no IP storage&rdquo; is a true, tested property of
+          the code, which is not the same as a lawyer saying no consent banner
+          is needed in your jurisdiction. The repository is not public yet; that
+          is the next step.
+        </p>
+      </div>
+      <div class="featured-actions reveal" style="margin-top: var(--space-12)">
+        <a href="/log/lantern-privacy-by-schema/" class="btn btn-primary"
+          >Read the Ship Log entry</a
+        >
+        <a href="/projects/#infra" class="btn">More infrastructure work</a>
+      </div>
+    </div>
+  </section>
+</Base>
