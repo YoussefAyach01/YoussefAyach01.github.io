@@ -70,6 +70,8 @@ export interface Project {
   featured?: boolean;
   /** 1..n: appears in the CV's Projects section in that order. */
   cvRank?: number;
+  /** One short line for the CV (the tagline is too long for one A4 page). */
+  cvLine?: string;
   /** Short note shown next to the status, when the status needs one. */
   note?: string;
 }
@@ -106,6 +108,8 @@ export const PROJECTS: Project[] = [
     built: "me",
     featured: true,
     cvRank: 1,
+    cvLine:
+      "Multi-tenant CI status SaaS: GitHub OAuth, encrypted tokens, external-cron poller, Stripe; full OWASP-style security pass. Next.js, Neon/Drizzle.",
     note: "private build, demo on request",
   },
   {
@@ -129,6 +133,8 @@ export const PROJECTS: Project[] = [
     built: "ai-agents",
     featured: true,
     cvRank: 2,
+    cvLine:
+      "TypeScript static-site engine, French + Arabic (RTL), 60 live demo sites, 497 tests. Directed and reviewed by me; built with AI coding agents.",
   },
   {
     id: "lantern-analytics",
@@ -144,6 +150,8 @@ export const PROJECTS: Project[] = [
     built: "ai-agents",
     featured: true,
     cvRank: 3,
+    cvLine:
+      "Cookieless analytics with no IP/cookie column by schema; AWS Terraform module (EC2, EIP, SG) tested with a mocked provider. Hono, SQLite. Built with AI coding agents.",
     note: "repo coming; not applied to real AWS yet",
   },
   {
