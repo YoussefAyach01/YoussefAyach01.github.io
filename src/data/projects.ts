@@ -143,9 +143,10 @@ export const PROJECTS: Project[] = [
     tagline:
       "Cookieless web analytics with no IP, cookie or fingerprint column anywhere in the schema, plus an AWS Terraform module tested against a mocked provider.",
     group: "infra",
-    status: "private",
+    status: "source",
     date: "2026-11",
     stack: ["Hono", "SQLite", "Terraform (AWS)", "Docker"],
+    repo: gh("lantern-analytics"),
     caseStudy: "/projects/lantern-analytics/",
     log: "/log/lantern-privacy-by-schema/",
     built: "ai-agents",
@@ -153,7 +154,7 @@ export const PROJECTS: Project[] = [
     cvRank: 3,
     cvLine:
       "Cookieless analytics with no IP/cookie column by schema; AWS Terraform module (EC2, EIP, SG) tested with a mocked provider. Hono, SQLite. Built with AI coding agents.",
-    note: "repo coming; not applied to real AWS yet",
+    note: "Terraform never applied to real AWS",
   },
   {
     id: "ceojoe",
