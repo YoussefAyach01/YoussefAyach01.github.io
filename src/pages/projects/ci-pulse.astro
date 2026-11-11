@@ -1,0 +1,245 @@
+---
+import Base from "../../layouts/Base.astro";
+import Window from "../../components/Window.astro";
+import landing from "../../assets/img/ci-pulse-landing.webp";
+import dashboard from "../../assets/img/ci-pulse-dashboard.webp";
+import settings from "../../assets/img/ci-pulse-settings.webp";
+---
+
+<Base
+  title="ci-pulse — case study — Ayach Youssef"
+  description="ci-pulse: a multi-tenant CI status board built on my ci-status CLI. GitHub OAuth, encrypted tokens, an external-cron poller, Stripe billing, and what a real security pass found on a finished app."
+>
+  <!-- ============ TITLE ============ -->
+  <section class="study-head container">
+    <p class="eyebrow">Case study — own product, 2026</p>
+    <h1 class="display">ci-pulse</h1>
+    <p class="lede">
+      A hosted CI status board for small teams: sign in with GitHub, pick the
+      repositories you care about, see every one&rsquo;s latest Actions run on
+      one page, and get a Slack or Discord message the moment a build turns red.
+      Multi-tenant from the first commit, with a free and a paid tier.
+    </p>
+
+    <div class="meta-band">
+      <div class="meta-cell">
+        <span class="eyebrow">Role</span>
+        <p>Everything: design, code, tests, security pass</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Timeline</span>
+        <p>September — October 2026</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Stack</span>
+        <p>
+          Next.js &middot; Postgres (Neon, Drizzle) &middot; Auth.js &middot;
+          Stripe
+        </p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Status</span>
+        <p>Private build, feature-complete. Demo on request.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Why this one</p>
+        <h2 class="display">Start from code that already works</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          In September I wrote <a href="/projects/#tooling">ci-status</a>, a
+          small Go CLI that prints the latest GitHub Actions run for a list of
+          repositories and can wait for one to finish. It solved my own problem
+          and nothing else. When I decided to build a product rather than take
+          freelance hours, the fastest honest path was to turn that polling
+          logic into a hosted service for teams, instead of starting from a
+          blank idea.
+        </p>
+        <p>
+          The product is deliberately narrow. It does one thing a team of two to
+          fifteen people actually wants: one page with every repo&rsquo;s build
+          status, and one message when a repo goes from passing to failing. Not
+          a message per failed run, not a dashboard of charts.
+        </p>
+      </div>
+      <div class="reveal" style="margin-top: var(--space-12)">
+        <Window
+          title="ci-pulse — landing page"
+          src={landing}
+          alt="The ci-pulse landing page: the headline 'Know the moment a build goes red', a sign-in-with-GitHub button, and a mock status board showing acme/api passing, acme/web failing and acme/infra running, with a Slack alert underneath"
+          caption="The pitch and the product on one screen. The status board is a static mock here; the real one is below."
+          eager
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ARCHITECTURE ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Architecture</p>
+        <h2 class="display">Five decisions that shaped it</h2>
+      </div>
+      <div class="bento">
+        <article class="card reveal" style="--index: 0">
+          <h3>One OAuth flow, two jobs</h3>
+          <p>
+            Auth.js with GitHub as the only provider. The same sign-in that
+            creates the session also grants the <code>repo</code> scope the poller
+            needs, so there is no second &ldquo;paste a token&rdquo; step. GitHub
+            offers nothing narrower that still reads private repositories, and the
+            landing page says so.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 1">
+          <h3>Tokens encrypted at rest</h3>
+          <p>
+            Each user&rsquo;s GitHub token is stored AES-256-GCM encrypted,
+            packed as <code>iv:tag:ciphertext</code> in one opaque column. The key
+            comes from the environment and is checked for length at boot. A database
+            leak alone does not leak anyone&rsquo;s GitHub access.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 2">
+          <h3>Teams, not users, own things</h3>
+          <p>
+            Eight tables: users, orgs, memberships, GitHub connections, repos,
+            run status, webhooks, invites. Every repo, webhook and invite
+            belongs to an org, and every server action re-checks membership and
+            role for that org before touching a row.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 3">
+          <h3>The poller is not on Vercel Cron</h3>
+          <p>
+            Vercel&rsquo;s free tier runs cron once a day; the product needs
+            every five to fifteen minutes. So polling is a secret-guarded
+            endpoint that any external scheduler can call, with a GitHub Actions
+            workflow as the default caller.
+            <a href="/log/vercel-hobby-cron/">The Ship Log entry</a> has the reasoning.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 4">
+          <h3>Cheap requests, polite backoff</h3>
+          <p>
+            Ported from the CLI and extended: each check sends
+            <code>If-None-Match</code> with the last ETag, so an unchanged repo costs
+            a 304 that does not count against the rate limit. A 403 or 429 raises
+            a typed error carrying the reset time, and the batch stops instead of
+            hammering.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 5">
+          <h3>Alerts only on the transition</h3>
+          <p>
+            The poller stores the previous status and fires a webhook only when
+            a repo goes from passing to failing. Webhook URLs are validated
+            against the real Slack and Discord hosts, so the server will not
+            POST to an internal address someone typed into a form.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IN THE INTERFACE ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">In the interface</p>
+        <h2 class="display">Small on purpose</h2>
+      </div>
+      <div class="shots">
+        <div class="reveal">
+          <Window
+            title="ci-pulse — dashboard"
+            src={dashboard}
+            alt="The ci-pulse dashboard for a team: one monitored repository, YoussefAyach01/YoussefAyach01.github.io, marked 'Waiting for first check', with a 'Connect repos' button and the note '1/2 repos on the Free plan'"
+            caption="A team's board, before the first poll. Plan usage is enforced server-side, not just shown."
+          />
+        </div>
+        <div class="reveal">
+          <Window
+            title="ci-pulse — settings"
+            src={settings}
+            alt="The ci-pulse settings page: a Plan card reading 'Free: up to 2 repos, checked every 15 minutes, no alerts', an Alerts card explaining Slack and Discord alerts come with Pro, and a Team card listing one owner"
+            caption="Settings degrade honestly: when billing is not configured, the page says so instead of showing a broken button."
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECURITY PASS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">The security pass</p>
+        <h2 class="display">
+          What a checklist found on a &ldquo;finished&rdquo; app
+        </h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          Three weeks after the build was feature-complete I ran a full security
+          checklist against it: input validation, authorization on every
+          mutation, secrets, headers, webhooks, dependencies. Most of the
+          earlier hardening held: no route lets one team read or change
+          another&rsquo;s rows, the cron secret is compared in constant time and
+          fails closed when unset, webhook signatures are verified.
+        </p>
+        <p>
+          Three things did not hold, and each got a commit. The Next.js version
+          in use had a critical remote-code-execution advisory in its Open Graph
+          image helper and a server-side request forgery in image optimisation;
+          both were patched by an upgrade. Environment variables were read ad
+          hoc, so a missing or malformed value failed in the middle of a
+          request; they are now validated once at boot by a single schema, and a
+          bad deploy fails before it serves anything. And the original cron
+          check used a template string, which would have accepted the literal
+          header <code>Bearer undefined</code> when the secret was unset; that is
+          the bug the constant-time check replaced.
+          <a href="/log/ci-pulse-security-pass/">The full write-up</a> is in the Ship
+          Log.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIMITS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Honest limits</p>
+        <h2 class="display">What this is not</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          It is not live. The code is complete, typed, linted, audited and
+          covered by 26 tests, and the sign-in, repo picker, settings and invite
+          flows have all been driven end to end against a real database. What
+          remains is operational: production environment variables, the Stripe
+          webhook and price, and a mail key. The billing code is written but has
+          never run against real Stripe, and I would not claim otherwise.
+        </p>
+        <p>
+          The repository is private while the product decision is open. I am
+          happy to walk through the code and the running app on a call.
+        </p>
+      </div>
+      <div class="featured-actions reveal" style="margin-top: var(--space-12)">
+        <a href="/log/ci-pulse-security-pass/" class="btn btn-primary"
+          >Read the security-pass entry</a
+        >
+        <a href="/#contact" class="btn">Ask for a demo</a>
+      </div>
+    </div>
+  </section>
+</Base>
