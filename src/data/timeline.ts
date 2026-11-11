@@ -42,7 +42,7 @@ export const TIMELINE: TimelineEntry[] = [
   {
     date: "2026.09",
     datetime: "2026-09-19",
-    text: "ci-pulse, a multi-tenant CI status SaaS, feature-complete",
+    text: "ci-pulse built: a multi-tenant CI status SaaS, now live",
     href: "/projects/ci-pulse/",
   },
   {

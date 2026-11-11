@@ -1,0 +1,171 @@
+---
+import Base from "../../layouts/Base.astro";
+import Window from "../../components/Window.astro";
+import banner from "../../assets/img/ceojoe-banner.webp";
+import showcase from "../../assets/img/ceojoe-showcase.webp";
+---
+
+<Base
+  title="CeoJoe — case study — Ayach Youssef"
+  description="CeoJoe: the site for my small web studio, with a showcase of sixty live demo sites. Three hero redesigns, an image pipeline driven through a browser, and a rule that demos are never presented as client work."
+>
+  <section class="study-head container">
+    <p class="eyebrow">Case study — my own studio, 2026</p>
+    <h1 class="display">CeoJoe</h1>
+    <p class="lede">
+      The site for CeoJoe, the small studio I take client work through. Its job
+      is to show, not claim: every product on it can be opened, and its showcase
+      links to live demo sites built with
+      <a href="/projects/site-kit/">Site Kit</a>.
+    </p>
+
+    <div class="meta-band">
+      <div class="meta-cell">
+        <span class="eyebrow">Role</span>
+        <p>Direction and review; built with AI coding agents</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Timeline</span>
+        <p>October — November 2026</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Stack</span>
+        <p>Astro &middot; GSAP &middot; one React island &middot; Vercel</p>
+      </div>
+      <div class="meta-cell">
+        <span class="eyebrow">Status</span>
+        <p>
+          Live at <a
+            href="https://ceojoe.vercel.app"
+            target="_blank"
+            rel="noopener">ceojoe.vercel.app</a
+          >
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">The problem</p>
+        <h2 class="display">A new studio has no client list to show</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          A studio site usually leans on logos and testimonials. A studio that
+          is a few months old has neither, and inventing them is the fastest way
+          to lose the one thing it does have. So the rule for this site was set
+          before any design: nothing on it may imply a client that does not
+          exist. Products are labelled as our own. Demo sites are labelled as
+          concept demos. Team cards for roles nobody holds yet say
+          &ldquo;we&rsquo;re hiring&rdquo; instead of showing a stock face.
+        </p>
+        <p>
+          What a new studio can show is range and finish. That became the brief:
+          one site per kind of business, each complete, each live, each in
+          French and Arabic.
+        </p>
+      </div>
+      <div class="reveal" style="margin-top: var(--space-12)">
+        <Window
+          title="ceojoe — home banner"
+          src={banner}
+          alt="The CeoJoe home page banner: the headline 'A site that fills your tables', labelled '01 / 08 Hotels and Restaurants', beside a browser frame and a phone frame showing the live Riad des Lanternes demo site in French"
+          caption="The banner plays one real demo per field, in that demo's own colours, then rests. Pause, replay, arrow keys; no autoplay under reduced motion."
+          eager
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">What I would point at</p>
+        <h2 class="display">Four decisions</h2>
+      </div>
+      <div class="bento">
+        <article class="card reveal" style="--index: 0">
+          <h3>The hero took several tries</h3>
+          <p>
+            First a Three.js scene: impressive, heavy, and it sat behind the
+            text. Then a typewriter build log: lighter, but about the site
+            instead of the customer. Then a portrait. The current one is real
+            screenshots of real demos. The Three.js dependency is gone entirely.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 1">
+          <h3>A photo per demo, no API bill</h3>
+          <p>
+            Each demo needed its own photograph. Generation ran through a
+            consumer image tool driven in the browser, one prompt per trade,
+            with a shared style prefix so the images read as one set. One batch
+            landed shifted by a file; a contact sheet caught it.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 2">
+          <h3>A build that refuses a typo</h3>
+          <p>
+            The showcase groups demos into eight categories from one manifest. A
+            site with a category that is not in the list fails the build, where
+            it used to vanish from the page without a word. Thumbnails are
+            served at two densities from the site&rsquo;s own assets.
+          </p>
+        </article>
+        <article class="card reveal" style="--index: 3">
+          <h3>Accessibility found in dark mode</h3>
+          <p>
+            A computed-contrast scan over every page in both themes found
+            failures a visual check had missed, all the same mistake: a text
+            colour that flipped with the theme on a background that did not. One
+            was the skip link, invisible until keyboard focus.
+          </p>
+        </article>
+      </div>
+      <div class="reveal" style="margin-top: var(--space-12)">
+        <Window
+          title="ceojoe — showcase"
+          src={showcase}
+          alt="The CeoJoe showcase page: the Food and Hospitality category with six demo cards, each a photograph, a business name such as Le Grain Chaud or La Mie Dorée, and a 'View live demo' link"
+          caption="Fifty-six demos, grouped by trade. Every card opens a complete live site."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Honest limits</p>
+        <h2 class="display">What this is not</h2>
+      </div>
+      <div class="prose reveal">
+        <p>
+          It is not proof of client results; there are none on it, by design.
+          The site and the demos were built with AI coding agents under my
+          direction and review. It still runs on a Vercel subdomain while the
+          real domain is chosen, and it has had automated accessibility checks
+          but not a full screen-reader pass.
+          <a href="/log/sixty-sites-one-afternoon-of-images/"
+            >The Ship Log entry</a
+          > covers the image pipeline and what went wrong in it.
+        </p>
+      </div>
+      <div class="featured-actions reveal" style="margin-top: var(--space-12)">
+        <a
+          href="https://ceojoe.vercel.app"
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener">Open CeoJoe</a
+        >
+        <a
+          href="https://ceojoe.vercel.app/showcase"
+          class="btn"
+          target="_blank"
+          rel="noopener">Browse the showcase</a
+        >
+      </div>
+    </div>
+  </section>
+</Base>

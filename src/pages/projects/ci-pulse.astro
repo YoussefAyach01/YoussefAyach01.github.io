@@ -12,7 +12,7 @@ import settings from "../../assets/img/ci-pulse-settings.webp";
 >
   <!-- ============ TITLE ============ -->
   <section class="study-head container">
-    <p class="eyebrow">Case study — own product, 2026</p>
+    <p class="eyebrow">Case study — own product, live, 2026</p>
     <h1 class="display">ci-pulse</h1>
     <p class="lede">
       A hosted CI status board for small teams: sign in with GitHub, pick the
@@ -39,7 +39,13 @@ import settings from "../../assets/img/ci-pulse-settings.webp";
       </div>
       <div class="meta-cell">
         <span class="eyebrow">Status</span>
-        <p>Private build, feature-complete. Demo on request.</p>
+        <p>
+          Live at <a
+            href="https://ci-pulse.vercel.app"
+            target="_blank"
+            rel="noopener">ci-pulse.vercel.app</a
+          >. Source private.
+        </p>
       </div>
     </div>
   </section>
@@ -222,23 +228,35 @@ import settings from "../../assets/img/ci-pulse-settings.webp";
       </div>
       <div class="prose reveal">
         <p>
-          It is not live. The code is complete, typed, linted, audited and
-          covered by 26 tests, and the sign-in, repo picker, settings and invite
-          flows have all been driven end to end against a real database. What
-          remains is operational: production environment variables, the Stripe
-          webhook and price, and a mail key. The billing code is written but has
-          never run against real Stripe, and I would not claim otherwise.
+          It is live and it has no customers yet. The code is typed, linted,
+          audited and covered by 26 tests, and the sign-in, repo picker,
+          settings and invite flows have all been driven end to end against a
+          real database. The billing code is written, but I have not taken a
+          real payment through it, and I would not claim otherwise.
+        </p>
+        <p>
+          The scheduler is the weak point. The polling workflow asks GitHub for
+          a run every five minutes; on a quiet repository GitHub actually
+          delivers one every few hours. The product&rsquo;s promise depends on
+          that interval, so the caller has to move to a scheduler that keeps
+          time before anyone pays for the five-minute plan.
+          <a href="/log/vercel-hobby-cron/">The Ship Log entry</a> has the measurements.
         </p>
         <p>
           The repository is private while the product decision is open. I am
-          happy to walk through the code and the running app on a call.
+          happy to walk through the code on a call.
         </p>
       </div>
       <div class="featured-actions reveal" style="margin-top: var(--space-12)">
         <a href="/log/ci-pulse-security-pass/" class="btn btn-primary"
           >Read the security-pass entry</a
         >
-        <a href="/#contact" class="btn">Ask for a demo</a>
+        <a
+          href="https://ci-pulse.vercel.app"
+          class="btn"
+          target="_blank"
+          rel="noopener">Open the live app</a
+        >
       </div>
     </div>
   </section>

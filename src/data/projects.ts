@@ -100,7 +100,8 @@ export const PROJECTS: Project[] = [
     tagline:
       "A hosted, multi-tenant CI status board: connect GitHub repos with OAuth, see every Actions run on one dashboard, get a Slack or Discord alert when a build turns red.",
     group: "product",
-    status: "private",
+    status: "live",
+    url: "https://ci-pulse.vercel.app",
     date: "2026-10",
     stack: ["Next.js", "Neon / Drizzle", "Auth.js", "Stripe"],
     caseStudy: "/projects/ci-pulse/",
@@ -110,7 +111,7 @@ export const PROJECTS: Project[] = [
     cvRank: 1,
     cvLine:
       "Multi-tenant CI status SaaS: GitHub OAuth, encrypted tokens, external-cron poller, Stripe; full OWASP-style security pass. Next.js, Neon/Drizzle.",
-    note: "private build, demo on request",
+    note: "source private, walkthrough on request",
   },
   {
     id: "site-kit",

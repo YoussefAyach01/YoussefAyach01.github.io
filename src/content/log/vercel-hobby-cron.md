@@ -22,4 +22,10 @@ Detaching the scheduler from the host also made the endpoint better, because it 
 
 ## What is still open
 
-The workflow needs two repository secrets, the app's URL and the shared cron secret, and they must match the values in the deployment. That is a deploy-time step I have not done yet, because the app is not deployed yet. When it is, the first thing I will check is the gap between scheduled and actual run times in the Actions log, because "every five minutes" on GitHub's scheduler is a floor, not a promise.
+The workflow needs two repository secrets, the app's URL and the shared cron secret, and they must match the values in the deployment. When the app is deployed, the first thing I will check is the gap between scheduled and actual run times in the Actions log, because "every five minutes" on GitHub's scheduler is a floor, not a promise.
+
+## Update, November 2026: I checked
+
+The app is live and the workflow is green on every run. It is also nowhere near every five minutes. The last twelve scheduled runs in the Actions log are between three and eleven hours apart: 02:59, 10:40, 18:03 on one day, for example. GitHub documents that scheduled workflows can be delayed when load is high. In practice a quiet private repo whose only job is a cron seems to get the worst of it.
+
+Nothing is broken in the sense a test would catch. The endpoint is called, authenticates, polls what is due, and returns in ten seconds. But a status board that looks a few times a day cannot honestly sell a five-minute plan. Because the scheduler was kept outside the app, the fix does not touch the app: point a scheduler that keeps time at the same endpoint with the same secret. That is the next change, and it comes before anyone is charged for the faster interval.
