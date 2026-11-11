@@ -453,6 +453,40 @@ figcaption {
   flex-wrap: wrap;
   gap: var(--space-2);
 }
+.card .card-links {
+  flex-grow: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-family: var(--mono);
+  font-size: var(--text-xs);
+}
+.card .card-meta {
+  flex-grow: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  margin-top: var(--space-1);
+}
+.status-note {
+  font-family: var(--mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+.row .row-note .tag {
+  vertical-align: middle;
+}
+.row .row-note .status-note {
+  display: block;
+  margin-top: var(--space-1);
+  max-width: 16ch;
+  white-space: normal;
+}
+.row-ai {
+  color: var(--muted);
+}
 
 /* ---------- Skills ---------- */
 .skills {

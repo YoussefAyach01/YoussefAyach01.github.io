@@ -1,0 +1,42 @@
+---
+import type { Project } from "../data/projects";
+import StatusBadge from "./StatusBadge.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { project: p } = Astro.props;
+const primary = p.caseStudy ?? p.url ?? p.repo;
+const external = primary && !primary.startsWith("/");
+---
+
+<div class="row">
+  <span class="row-key">{p.stack[0]}</span>
+  <div>
+    <h3>
+      {
+        primary ? (
+          <a
+            href={primary}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener" : undefined}
+          >
+            {p.name}
+          </a>
+        ) : (
+          p.name
+        )
+      }
+    </h3>
+    <p>
+      {p.tagline}
+      {
+        p.built === "ai-agents" && (
+          <span class="row-ai"> Built with AI coding agents.</span>
+        )
+      }
+    </p>
+  </div>
+  <span class="row-note"><StatusBadge status={p.status} note={p.note} /></span>
+</div>

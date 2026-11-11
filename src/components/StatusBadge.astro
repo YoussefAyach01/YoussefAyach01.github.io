@@ -1,0 +1,21 @@
+---
+import type { Status } from "../data/projects";
+
+interface Props {
+  status: Status;
+  note?: string;
+}
+
+const { status, note } = Astro.props;
+
+const LABEL: Record<Status, { text: string; cls: string }> = {
+  live: { text: "live", cls: "tag tag-green" },
+  released: { text: "released", cls: "tag tag-blue" },
+  source: { text: "source", cls: "tag" },
+  private: { text: "private build", cls: "tag tag-yellow" },
+};
+
+const { text, cls } = LABEL[status];
+---
+
+<span class={cls}>{text}</span>{note && <span class="status-note">{note}</span>}

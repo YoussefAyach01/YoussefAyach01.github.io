@@ -1,0 +1,61 @@
+---
+import type { Project } from "../data/projects";
+import StatusBadge from "./StatusBadge.astro";
+
+interface Props {
+  project: Project;
+  index?: number;
+}
+
+const { project: p, index = 0 } = Astro.props;
+const primary = p.caseStudy ?? p.url ?? p.repo;
+const external = primary && !primary.startsWith("/");
+---
+
+<article class="card reveal" style={`--index: ${index}`}>
+  <h3>
+    {
+      primary ? (
+        <a
+          href={primary}
+          target={external ? "_blank" : undefined}
+          rel={external ? "noopener" : undefined}
+        >
+          {p.name}
+        </a>
+      ) : (
+        p.name
+      )
+    }
+  </h3>
+  <p>{p.tagline}</p>
+  <p class="card-links">
+    {p.caseStudy && <a href={p.caseStudy}>Case study</a>}
+    {
+      p.url && (
+        <a href={p.url} target="_blank" rel="noopener">
+          {p.status === "released" ? "Release" : "Live"}
+        </a>
+      )
+    }
+    {
+      p.repo && (
+        <a href={p.repo} target="_blank" rel="noopener">
+          Source
+        </a>
+      )
+    }
+    {p.log && <a href={p.log}>Ship Log</a>}
+  </p>
+  <div class="tags">
+    {p.stack.map((s) => <span class="tag">{s}</span>)}
+  </div>
+  <p class="card-meta">
+    <StatusBadge status={p.status} note={p.note} />
+    {
+      p.built === "ai-agents" && (
+        <span>directed by me, built with AI coding agents</span>
+      )
+    }
+  </p>
+</article>
