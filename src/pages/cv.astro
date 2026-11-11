@@ -109,6 +109,37 @@ import Base from "../layouts/Base.astro";
         </div>
 
         <div class="cv-section">
+          <h3 class="cv-h">Projects</h3>
+          <div class="cv-item">
+            <div class="cv-item-head">
+              <strong>Backend &amp; DevOps sprint — ten small builds</strong>
+              <span class="cv-date">Sep 2026</span>
+            </div>
+            <ul>
+              <li>
+                CI/CD + Ansible deploy pipeline, Terraform module,
+                Prometheus/Grafana stack, hardened Fastify API with Redis, JWT
+                auth, a Go CLI.
+              </li>
+            </ul>
+          </div>
+          <div class="cv-item">
+            <div class="cv-item-head">
+              <strong
+                >Site Kit — 60 bilingual business sites from one engine</strong
+              >
+              <span class="cv-date">Sep — Nov 2026</span>
+            </div>
+            <ul>
+              <li>
+                TypeScript static-site engine, French + Arabic (RTL), 497 tests.
+                Directed and reviewed by me; built with AI coding agents.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-section">
           <h3 class="cv-h">Education</h3>
           <div class="cv-item">
             <div class="cv-item-head">
@@ -279,7 +310,7 @@ import Base from "../layouts/Base.astro";
   @media print {
     @page {
       size: A4;
-      margin: 12mm;
+      margin: 10mm 12mm;
     }
     .cv-sheet {
       border: none;
@@ -287,14 +318,27 @@ import Base from "../layouts/Base.astro";
       padding: 0;
       max-width: none;
     }
+    .cv-head {
+      padding-bottom: 3mm;
+    }
     .cv-name {
       font-size: 1.7rem;
     }
     .cv-section {
-      margin-top: 5mm;
+      margin-top: 3.5mm;
+    }
+    .cv-h {
+      margin-bottom: 1.5mm;
+    }
+    .cv-item {
+      margin-bottom: 2mm;
     }
     .cv-item ul {
       font-size: 0.8rem;
+      margin-top: 1mm;
+    }
+    .cv-item li {
+      margin-bottom: 0.5mm;
     }
     .cv-skills {
       font-size: 0.8rem;
@@ -302,6 +346,14 @@ import Base from "../layouts/Base.astro";
     }
     .cv-contact {
       line-height: 1.6;
+    }
+    /* Languages only needs its own width; give the rest to skills so they wrap less. */
+    .cv-cols {
+      grid-template-columns: 1fr auto;
+    }
+    /* The site URL is already in the header; the note costs a line on paper. */
+    .cv-footer-note {
+      display: none;
     }
     .cv-sheet-wrap {
       padding: 0;
