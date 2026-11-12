@@ -163,6 +163,7 @@ a {
   align-items: center;
 }
 .masthead nav a {
+  white-space: nowrap;
   font-size: var(--text-sm);
   color: var(--muted);
   text-decoration: none;
@@ -711,7 +712,8 @@ figcaption {
     padding-block: var(--space-3);
   }
   .masthead nav {
-    gap: var(--space-6);
+    gap: var(--space-4);
+    flex-wrap: wrap;
     width: 100%;
   }
   .masthead nav a:not(.btn) {

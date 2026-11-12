@@ -1,0 +1,107 @@
+---
+import Base from "../layouts/Base.astro";
+import { TIMELINE } from "../data/timeline";
+import { counts } from "../data/projects";
+
+const n = counts();
+// Newest first for a "what's been happening" feed; drop the open-ended "now" row.
+const updates = TIMELINE.filter((e) => e.date !== "now").reverse();
+---
+
+<Base
+  title="About — Ayach Youssef"
+  description="About Ayach Youssef: a backend and DevOps engineer in Morocco, founder of the CeoJoe web studio. What I'm working on now and a running list of updates."
+>
+  <section class="study-head container">
+    <p class="eyebrow">About</p>
+    <h1 class="display">Backend &amp; DevOps, and a startup on the side.</h1>
+    <p class="lede">
+      I&rsquo;m Youssef, a computer-engineering student in Settat, Morocco. I
+      build and run backend systems: APIs, databases, Linux servers, CI/CD. I
+      also founded <a href="/projects/ceojoe/">CeoJoe</a>, a web studio that
+      builds bilingual (French and Arabic) websites for small businesses.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Now</p>
+        <h2 class="display">What I&rsquo;m working on</h2>
+      </div>
+      <div class="rows reveal">
+        <div class="row">
+          <span class="row-key">work</span>
+          <div>
+            <h3>Open to backend and DevOps roles</h3>
+            <p>
+              Remote or on-site. The <a href="/cv/">CV</a> is one page, and the
+              <a href="/projects/onebotads/">OneBotAds case study</a> is the best
+              picture of what I can do end to end.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">startup</span>
+          <div>
+            <h3>Growing CeoJoe</h3>
+            <p>
+              Sites for restaurants, clinics, salons and trades, built from my
+              own <a href="/projects/site-kit/">Site Kit</a>. Sixty live demo
+              sites are on the <a
+                href="https://ceojoe.vercel.app/showcase"
+                target="_blank"
+                rel="noopener">showcase</a
+              >.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+        <div class="row">
+          <span class="row-key">building</span>
+          <div>
+            <h3>Shipping and hardening side projects</h3>
+            <p>
+              {n.total} projects on the <a href="/projects/">projects page</a>,
+              each with an honest status badge. Write-ups of what went wrong
+              live in the <a href="/log/">Ship Log</a>.
+            </p>
+          </div>
+          <span class="row-note"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Updates</p>
+        <h2 class="display">Newest first</h2>
+      </div>
+      <div class="rows reveal">
+        {
+          updates.map((e) => (
+            <div class="row">
+              <time datetime={e.datetime}>{e.date}</time>
+              <div>
+                <h3>{e.href ? <a href={e.href}>{e.text}</a> : e.text}</h3>
+              </div>
+              <span class="row-note" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="featured-actions reveal">
+        <a href="/#contact" class="btn btn-primary">Get in touch</a>
+        <a href="/cv/" class="btn">View the CV</a>
+      </div>
+    </div>
+  </section>
+</Base>
