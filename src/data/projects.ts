@@ -160,7 +160,7 @@ export const PROJECTS: Project[] = [
     id: "ceojoe",
     name: "CeoJoe",
     tagline:
-      "The site for CeoJoe, my small web studio: services, pricing, and a showcase of all sixty Site Kit demos, presented as concept builds and not as client work.",
+      "The site for CeoJoe, my startup, a web studio for small businesses: services, pricing, and a showcase of all sixty Site Kit demos, presented as concept builds and not as client work.",
     group: "product",
     status: "live",
     date: "2026-10",
